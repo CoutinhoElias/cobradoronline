@@ -1,0 +1,1 @@
+web: gunicorn cobradoronline.wsgi --log-file -

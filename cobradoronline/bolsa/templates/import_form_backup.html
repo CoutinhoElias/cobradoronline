@@ -1,0 +1,36 @@
+<!--INCLUINDO O FORM FICA LEGAL E SEM FUNCIONAR, RETIRANDO FICA FEIO EM FUNCIONANDO-->
+{% extends "account/base.html" %}
+<!--{% load static %}-->
+
+
+<!--{% include 'material/includes/material_css.html' %}
+<script src="{% static 'material/js/jquery.js' %}"></script>
+{% include 'material/includes/material_js.html' %}-->
+
+
+{% load material_form %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Agendamento" %}{% endblock %}
+
+{% block inner %}
+
+  <form action="{% url 'bolsa:upload_xls' %}" enctype="multipart/form-data">
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>Arquivo</span>
+        <input type="file">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+
+    <a class="waves-effect waves-light btn" type="submit"><i class="material-icons right">cloud</i>Importar</a>
+    <button type="submit" name="_submit" class="btn">Importar</button>
+  </form>
+
+
+{% endblock %}

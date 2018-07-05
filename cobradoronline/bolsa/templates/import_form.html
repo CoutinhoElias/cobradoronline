@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+
+{% block content %}
+        <!-- BEGIN FILE UPLOAD -->
+        <div class="row">
+            <div class="col-lg-offset-1 col-md-10">
+                <div class="card">
+                    <div class="card-head style-primary">
+                        <header>Planilha com Plano de Contas em Excel (*.xls e *.xlsx)</header>
+                    </div>
+                    <div class="card-body no-padding">
+                        <form method="post" action="{% url 'bolsa:simple_upload'  %}" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="dz-message">
+                                <h3>Solte os arquivos aqui ou clique para fazer o upload.</h3>
+                                <em>(Apesar de aceitar, ainda não trabalhamos com múltiplos arquivos <strong>portanto</strong> escolha apenas um.)</em>
+                            </div>
+                        </form>
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+                <em class="text-caption">Dropzone file upload</em>
+            </div><!--end .col -->
+        </div><!--end .row -->
+        <!-- END FILE UPLOAD -->
+{% endblock %}
+
+{% block extrajs %}
+<script>
+(function($) {
+    Dropzone.options.myAwesomeDropzone = {
+        init: function() {
+            var myDropzone = this;
+            myDropzone.on("success", function(data) {
+                // esse data contem alguns dados do arquivo, nome, tamanho, procentagem enviada, etc, e um dos campos STATUS parece indicar se tudo ocorreu bem.
+                // tem o campo XHR e nele tem o RESPONSE que contem dados retornados pela view.py, caso vc queira fazer alguma checagem, sei lá. dá uma olhada pra ver o que vc acha.
+                console.log(data['status']);
+                if (data['status'] == 'success'){
+                    location.href = '/bolsa/planodecontas/listar/';
+                }
+              });
+        }
+    };
+})(jQuery);
+</script>
+{% endblock extrajs %}

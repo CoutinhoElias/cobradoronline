@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% load rest_framework %}
+{% load static %}
+
+{% block content %}
+
+<h1>Profile - {{ booking.title }}</h1>
+
+<form action="{% url 'bookings-api:update2' pk=45 %}" method="POST">
+    {% csrf_token %}
+    {% render_form serializer %}
+    <input type="submit" value="Save">
+</form>
+{% endblock content %}

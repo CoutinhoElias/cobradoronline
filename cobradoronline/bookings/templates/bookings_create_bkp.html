@@ -1,0 +1,125 @@
+<!--<form class="form-horizontal" action="{% url 'bookings:bookings_create' %}" method="post">-->
+    <!--{% csrf_token %}-->
+    <!--<fieldset>-->
+        <!--<legend>Cadastro:</legend>-->
+        <!--{% for form_field in form %}-->
+            <!--<div class="form-group">-->
+                <!--<label for="{{ form_field.id_for_label }}"-->
+                       <!--class="col-sm-2 control-label">{{ form_field.label }}:</label>-->
+                <!--<div class="col-sm-10">-->
+                    <!--{{ form_field }}-->
+                    <!--{{ form_field.errors }}-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--{% endfor %}-->
+        <!--<div class="form-group">-->
+            <!--<div class="col-sm-offset-2 col-sm-10">-->
+                <!--<button type="submit" class="btn btn-primary">Criar</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</fieldset>-->
+<!--</form>-->
+
+    <!-- BEGIN VERTICAL FORM FLOATING LABELS -->
+    <div class="row"> <!-- col-lg-offset-0 -->
+        <div class="col-md-12">
+            <form class="form" action="{% url 'bookings:bookings_create' %}" method="post">
+                {% csrf_token %}
+                <div class="card">
+                        <div class="card-head style-primary">
+                            <header>Criando agendamento</header>
+                        </div>
+
+                        <label class="card-body floating-label col-md-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        {{form.title.errors}}
+                                        {{form.title}}
+                                        <label for="{{ form.title.id_for_label}}">{{form.title.label}}</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="input-daterange input-group col-sm-12" id="datepicker">
+                                    <div class="input-group-content">
+                                        {{form.start.errors}}
+                                        {{form.start}}
+                                        <label for="{{form.start.id_for_label}}">{{form.start.label}}</label>
+                                    </div>
+
+                                    <span class="input-group-addon">to</span>
+
+                                    <div class="input-group-content">
+                                        {{form.end.errors}}
+                                        {{form.end}}
+                                        <label for="{{form.end.id_for_label}}">{{form.end.label}}</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="checkbox checkbox-styled">
+
+                                <label for="{{ form.holiday.id_for_label }}" class="col-sm-3">
+                                    {{ form.holiday }}
+                                    {{ form.holiday.errors }}
+                                    <span>{{ form.holiday.label }}</span>
+                                </label>
+
+                                <label for="{{ form.overlap.id_for_label }}" class="col-sm-3">
+                                    {{ form.overlap }}
+                                    {{ form.overlap.errors }}
+                                    <span>{{ form.overlap.label }}</span>
+                                </label>
+
+                                <label for="{{ form.allday.id_for_label }}" class="col-sm-3">
+                                    {{ form.allday }}
+                                    {{ form.allday.errors }}
+                                    <span>{{ form.allday.label }}</span>
+                                </label>
+
+                                <label for="{{ form.editable.id_for_label }}" class="col-sm-3">
+                                    {{ form.editable }}
+                                    {{ form.editable.errors }}
+                                    <span>{{ form.editable.label }}</span>
+                                </label>
+
+                                <label for="{{ form.authorized.id_for_label }}" class="col-sm-3">
+                                    {{ form.authorized }}
+                                    {{ form.authorized.errors }}
+                                    <span>{{ form.authorized.label }}</span>
+                                </label>
+                            </label>
+
+                            <!-- BEGIN MULTI-SELECT -->
+                            <div class="row">
+                                <div class="col-lg-offset-0 col-md-12">
+                                        {{form.color}}
+                                </div><!--end .col -->
+                            </div><!--end .row -->
+                             <!-- END MULTI-SELECT -->
+
+
+                            <!-- BEGIN MULTI-SELECT -->
+                            <div class="row">
+                                <span>{{form.participants.label}}</span>
+                                <div class="col-lg-offset-0 col-md-12">
+                                        {{form.participants}}
+                                </div><!--end .col -->
+                            </div><!--end .row -->
+                             <!-- END MULTI-SELECT -->
+
+                            <div class="card-actionbar">
+                                <div class="card-actionbar-row">
+                                    <button type="button" class="btn btn-flat btn-secundary ink-reaction">Cancelar</button>
+                                    <button type="submit" class="btn btn-flat btn-primary ink-reaction">Salve</button>
+                                </div>
+                            </div>
+                        </label>
+                </div><!--end .card -->
+            </form>
+        </div><!--end .col -->
+    </div><!--end .row -->
+    <!-- END VERTICAL FORM FLOATING LABELS -->

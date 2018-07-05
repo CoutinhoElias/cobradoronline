@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+
+{% block content %}
+        <!-- BEGIN SEARCH BAR -->
+        <div class="card-body style-primary no-y-padding">
+            <form class="form form-inverse">
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-content">
+                            <input type="text" class="form-control" id="searchInput" name="searchInput" placeholder="Enter your search here">
+                            <div class="form-control-line"></div>
+                        </div>
+                        <div class="input-group-btn">
+                            <button class="btn btn-floating-action btn-default-bright" type="button"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div><!--end .form-group -->
+            </form>
+        </div><!--end .card-body -->
+        <!-- END SEARCH BAR -->
+
+        <!-- BEGIN RESPONSIVE TABLE 2 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body no-padding">
+                        <div class="table-responsive no-margin">
+                            <table class="table table-striped no-margin">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Classificação</th>
+                                        <!--<th>N.Classificação</th>-->
+                                        <th>Descrição</th>
+                                        <th>Cód.</th>
+                                        <!--<th>SN</th>-->
+                                        <!--<th>N</th>-->
+                                        <th>Origem</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for conta in planodecontas %}
+                                        <tr>
+                                            <!--<td>-->
+                                                <!--<a href="{{ conta.get_absolute_url }}">{{ conta.classification|linebreaks }}</a>-->
+                                            <!--</td>-->
+                                            <td></td>
+                                            <td>{{ conta.classification|linebreaks }}</td>
+                                            <td>{{ conta.name|linebreaks }}</td>
+                                            <td>{{ conta.reduced_account|linebreaks }}</td>
+                                            <!--<td>{{ conta.sn|linebreaks }}</td>-->
+                                            <!--<td>{{ conta.n|linebreaks }}</td>-->
+                                            <!--<td>{{ conta.source|linebreaks }}</td>-->
+                                            <td>{{ conta.account_type|linebreaks }}</td>
+
+                                        </tr>
+                                    {% empty %}
+                                        <li>
+                                            Sem registros
+                                        </li>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div><!--end .table-responsive -->
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+            </div><!--end .col -->
+        </div><!--end .row -->
+        <!-- END RESPONSIVE TABLE 1 -->
+{% endblock %}

@@ -1,0 +1,68 @@
+    <div class="form-group">
+        <div class="input-daterange input-group col-sm-12" id="datepicker">
+            <div class="input-group-content">
+                <input type="text" class="form-control" id="start">
+                <label for="start">Data inicio</label>
+            </div>
+
+            <span class="input-group-addon">to</span>
+
+            <div class="input-group-content">
+                <input type="text" class="form-control" id="end">
+                <label for="end">Data Fim</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="checkbox-inline checkbox-styled">
+            <label class="col-sm-3">
+                <input type="checkbox" value="">
+                <span>Sobrepor</span>
+            </label>
+        </div>
+        <div class="checkbox-inline checkbox-styled">
+            <label class="col-sm-3">
+                <input type="checkbox" value="">
+                <span>Dia inteiro</span>
+            </label>
+        </div>
+        <div class="checkbox-inline checkbox-styled">
+            <label class="col-sm-3">
+                <input type="checkbox" value="" disabled>
+                <span>Editável</span>
+            </label>
+        </div>
+        <div class="checkbox-inline checkbox-styled">
+            <label class="col-sm-3">
+                <input type="checkbox" value="">
+                <span>Autorizado</span>
+            </label>
+        </div>
+    </div><!--end .col -->
+
+
+
+    <!-- BEGIN MULTI-SELECT -->
+    <div class="row">
+        <div class="col-lg-offset-0 col-md-12">
+                {{form.color}}
+        </div><!--end .col -->
+    </div><!--end .row -->
+     <!-- END MULTI-SELECT -->
+
+
+    <!-- BEGIN MULTI-SELECT -->
+    <div class="row">
+        <span>{{form.participants.label}}</span>
+        <div class="col-lg-offset-0 col-md-12">
+                {{form.participants}}
+        </div><!--end .col -->
+    </div><!--end .row -->
+     <!-- END MULTI-SELECT -->
+
+    <div class="card-actionbar">
+        <div class="card-actionbar-row">
+            <button type="submit" class="btn btn-flat btn-primary ink-reaction">Salve</button>
+        </div>
+    </div>

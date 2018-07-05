@@ -1,0 +1,116 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+							<!-- BEGIN CALENDAR EVENTS -->
+							<div class="col-sm-3">
+								<h2>Upcoming events</h2>
+								<p class="opacity-75">Please plan your upcomming events by dragging them on the calendar.</p>
+								<br/>
+								<div class="checkbox checkbox-styled">
+									<label>
+										<input id="drop-remove" type="checkbox" checked>
+										<span>Remove after drop</span>
+									</label>
+								</div>
+								<br/>
+								<ul class="list divider-full-bleed list-events">
+									<li class="tile">
+										<div class="tile-content">
+											<div class="tile-text">Call clients for follow-up</div>
+											<div class="tile-icon"><i class="fa fa-circle-thin text-primary"></i></div>
+										</div>
+									</li>
+									<li class="tile" data-class-name="event-warning">
+										<div class="tile-content">
+											<div class="tile-text">Schedule meeting</div>
+											<div class="tile-icon"><i class="fa fa-circle-thin text-warning"></i></div>
+										</div>
+									</li>
+									<li class="tile" data-class-name="event-info">
+										<div class="tile-content">
+											<div class="tile-text">Upload files to server</div>
+											<div class="tile-icon"><i class="fa fa-circle-thin text-info"></i></div>
+										</div>
+									</li>
+									<li class="tile" data-class-name="event-success">
+										<div class="tile-content">
+											<div class="tile-text">Book flight for holiday</div>
+											<div class="tile-icon"><i class="fa fa-circle-thin text-success"></i></div>
+										</div>
+									</li>
+									<li class="tile" data-class-name="event-danger">
+										<div class="tile-content">
+											<div class="tile-text">Receive shipment</div>
+											<div class="tile-icon"><i class="fa fa-circle-thin text-danger"></i></div>
+										</div>
+									</li>
+									<li class="tile" data-class-name="event-default">
+										<div class="tile-content">
+											<div class="tile-text">Go to concert</div>
+											<div class="tile-icon"><i class="fa fa-circle-thin text-default"></i></div>
+										</div>
+									</li>
+								</ul>
+							</div><!--end .col -->
+							<!-- END CALENDAR EVENTS -->
+
+							<!-- BEGIN CALENDAR -->
+							<div class="col-sm-9">
+								<div class="card">
+									<div class="card-head style-primary">
+										<header>
+											<span class="selected-day">&nbsp;</span> &nbsp;<small class="selected-date">&nbsp;</small>
+										</header>
+										<div class="tools">
+											<div class="btn-group">
+												<a id="calender-prev" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-angle-left"></i></a>
+												<a id="calender-next" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-angle-right"></i></a>
+											</div>
+											<div class="btn-group pull-right">
+											</div>
+										</div>
+										<ul class="nav nav-tabs tabs-text-contrast tabs-accent" data-toggle="tabs">
+											<li data-mode="month" class="active"><a href="#">Mês</a></li>
+											<li data-mode="agendaWeek"><a href="#">Semana</a></li>
+											<li data-mode="agendaDay"><a href="#">Dia</a></li>
+										</ul>
+									</div><!--end .card-head -->
+									<div class="card-body no-padding">
+										<div id="calendar"></div>
+
+
+										<div id="eventContent" title="Event Details" style="display:none;">
+											Start: <span id="startTime"></span><br>
+											End: <span id="endTime"></span><br><br>
+											<p id="eventInfo"></p>
+											<p><strong><a id="eventLink" href="" target="_blank">Leia mais</a></strong></p>
+										</div>
+
+
+                                        <div id="novoEvento" title="Cadastrar Evento">
+
+                                        </div>
+
+
+
+									</div><!--end .card-body -->
+								</div><!--end .card -->
+							</div><!--end .col -->
+							<!-- END CALENDAR -->
+
+{% endblock content %}
+
+
+{% block extrajs %}
+		<script src="{% static 'js/libs/moment/moment.min.js' %}"></script> <!--DEVE FICAR AQUI -->
+        <script src="{% static 'js/libs/fullcalendar/fullcalendar.min.js' %}"></script>
+        <script src="{% static 'js/core/demo/DemoCalendar.js' %}"></script><!--DADOS DA BASE -->
+        <script src="{% static 'django_csrf.js' %}"></script>
+        <script src="{% static 'app.js' %}"></script>
+        <script>
+            $('#multi-select').multiSelect({});
+            $('#datepicker').datepicker();
+            $('#select').select2({});
+        </script>
+{% endblock extrajs %}

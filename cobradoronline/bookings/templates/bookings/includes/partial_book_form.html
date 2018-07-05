@@ -1,0 +1,80 @@
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                {{form.title.errors}}
+                {{form.title}}
+                <label for="{{ form.title.id_for_label}}">{{form.title.label}}</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-daterange input-group" id="datepicker">
+            <div class="input-group-content">
+                {{form.start.errors}}
+                {{form.start}}
+                <label for="{{form.start.id_for_label}}">{{form.start.label}}</label>
+            </div>
+            <span class="input-group-addon">e</span>
+            <div class="input-group-content">
+                {{form.end.errors}}
+                {{form.end}}
+                <label for="{{form.end.id_for_label}}">{{form.end.label}}</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-6">
+            <div class="checkbox checkbox-styled">
+                <label for="{{ form.holiday.id_for_label }}">
+                    {{ form.holiday }}
+                    <span>{{ form.holiday.label }}</span>
+                </label>
+            </div>
+            <div class="checkbox checkbox-styled">
+                <label for="{{ form.overlap.overlap }}">
+                    {{ form.overlap }}
+                    <span>Sobrepor</span>
+                </label>
+            </div>
+            <div class="checkbox checkbox-styled">
+                <label for="{{ form.allday.id_for_label }}">
+                    {{ form.allday }}
+                    <span>{{ form.allday.label }}</span>
+                </label>
+            </div>
+        </div><!--end .col -->
+
+        <div class="col-sm-6">
+            <div class="checkbox checkbox-styled">
+                <label for="{{ form.editable.id_for_label }}">
+                    {{ form.editable }}
+                    <span>{{ form.editable.label }}</span>
+                </label>
+            </div>
+            <div class="checkbox checkbox-styled">
+                <label for="{{ form.authorized.id_for_label }}">
+                    {{ form.authorized }}
+                    <span>{{ form.authorized.label }}</span>
+                </label>
+            </div>
+        </div><!--end .col -->
+    </div><!--end .form-group -->
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-lg-offset-0 col-md-12">
+                    {{form.color}}
+            </div><!--end .col -->
+        </div><!--end .row -->
+    </div><!--end .form-group -->
+
+    <div class="form-group">
+        <div class="row">
+            <span>{{form.participants.label}}</span>
+            <div class="col-lg-offset-0 col-md-12">
+                    {{form.participants}}
+            </div><!--end .col -->
+        </div><!--end .row -->
+    </div><!--end .form-group -->

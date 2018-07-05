@@ -1,0 +1,15 @@
+<html><body>
+<h1>Profiles</h1>
+<ul>
+    {% for booking in bookings %}
+    <!--<li>{{ booking.user }}</li>-->
+    <li>{{ booking.title }}</li>
+    <li>{{ booking.start }}</li>
+    <li>{{ booking.end }}</li>
+    <li>{{ booking.created_on }}</li>
+    <li>{{ booking.authorized }}</li>
+    <li>{{ booking.color }}</li>
+    <li>{{ booking.participants }}</li>
+    {% endfor %}
+</ul>
+</body></html>
