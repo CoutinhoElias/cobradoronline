@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'cobradoronline.core',
     'cobradoronline.bolsa',
     'cobradoronline.bookings',
+    'cobradoronline.person',
 ]
 
 MIDDLEWARE = [
