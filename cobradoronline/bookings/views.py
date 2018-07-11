@@ -11,14 +11,12 @@ from cobradoronline.bookings.forms import BookingsForm
 from cobradoronline.bookings.models import Booking
 from cobradoronline.bookings.serializer import BookingSerializer
 
-
-
 class BookingViewSet(ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
 
 
-def list(request):
+def bookings_list(request):
     selected_date = date.today()
     return list_date(request) #return list_date(request, selected_date.year, selected_date.month)
 

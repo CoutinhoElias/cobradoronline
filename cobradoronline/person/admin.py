@@ -6,6 +6,6 @@ from cobradoronline.person.models import Person
 class PersonModelAdmin(admin.ModelAdmin):
     pass
     #inlines = [AdressInline]
-    list_display = ('pk','name', 'purchase_limit', 'public_place', 'number', 'city',  'state', 'zipcode', 'country', 'neighborhood')
+    list_display = ('pk','name', 'public_place', 'number', 'city',  'state', 'zipcode', 'country', 'neighborhood')
 
 admin.site.register(Person, PersonModelAdmin)

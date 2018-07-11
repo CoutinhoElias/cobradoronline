@@ -1,7 +1,7 @@
 {% load static %}
 <html lang="en">
 	<head>
-		<title>Material Admin</title>
+		<title>Cobrador Online</title>
 
 		<!-- BEGIN META -->
 		<meta charset="utf-8">
@@ -45,7 +45,7 @@
 						<li class="header-nav-brand" >
 							<div class="brand-holder">
 								<a href="../../html/dashboards/dashboard.html">
-									<span class="text-lg text-bold text-primary">MATERIAL ADMIN</span>
+									<span class="text-lg text-bold text-primary">COBRADOR ONLINE</span>
 								</a>
 							</div>
 						</li>
@@ -59,6 +59,25 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="headerbar-right">
 					<ul class="header-nav header-nav-options">
+						<li class="header-nav-brand" >
+							<div class="brand-holder">
+								<a href="../../html/dashboards/dashboard.html">
+									<span class="text-lg text-bold text-primary">Clientes</span>
+								</a>
+							</div>
+						</li>
+
+						<li>
+							<br>
+						</li>
+
+						<li class="header-nav-brand" >
+							<div class="brand-holder">
+								<a href="../../html/dashboards/dashboard.html">
+									<span class="text-lg text-bold text-primary">Cobrança</span>
+								</a>
+							</div>
+						</li>
 						<li>
 							<!-- Search form -->
 							<form class="navbar-search" role="search">
@@ -134,7 +153,7 @@
 							<a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
 								<img src="{% static 'img/avatar1.jpg' %}" alt="" />
 								<span class="profile-info">
-									Daniel Johnson
+									Kledson Ney
 									<small>Administrator</small>
 								</span>
 							</a>
@@ -271,8 +290,8 @@
 							</a>
 							<!--start submenu -->
 							<ul>
-								<li><a href="{% url 'bookings:list'  %}" ><span class="title">Agenda</span></a></li>
-								<li><a href="{% url 'bookings:scheduling'  %}" ><span class="title">Agendamento</span></a></li>
+								<li><a href="{% url 'bookings:bookings_list' %}" ><span class="title">Agenda</span></a></li>
+								<li><a href="{% url 'bookings:scheduling' %}" ><span class="title">Agendamento</span></a></li>
 							</ul><!--end /submenu -->
 						</li><!--end /menu-li -->
 						<!-- END TABLES -->
