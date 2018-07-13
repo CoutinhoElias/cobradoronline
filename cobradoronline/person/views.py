@@ -19,6 +19,7 @@ def person_create(request):
             return HttpResponseRedirect('/cliente/lista/')
         else:
             print('<<<<==== AVISO DE FORMULARIO INVALIDO ====>>>>')
+            print(form)
             return render(request, 'person_create.html', {'form':form})
     else:
         context = {'form': PersonForm()}

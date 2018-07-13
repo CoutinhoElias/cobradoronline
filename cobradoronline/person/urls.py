@@ -3,7 +3,7 @@ from django.views.i18n import JavaScriptCatalog
 
 from cobradoronline.person.views import person_create, person_list
 
-app_name = 'bookings'
+app_name = 'person'
 
 urlpatterns = [
     url(r'novo/$', person_create, name='person_create'),
