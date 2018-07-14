@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <div class="col-lg-offset-1 col-md-8">
+    <div class="col-lg-offset-1 col-md-10">
 								<form class="create-form" url="{% url 'person:person_create' %}" method="post">
                                     {% csrf_token %}
 									<div class="card">
@@ -74,7 +74,7 @@
 										</div><!--end .card-body -->
 										<div class="card-actionbar">
 											<div class="card-actionbar-row">
-												<button type="submit" class="btn btn-flat btn-primary ink-reaction">Create account</button>
+												<button type="submit" class="btn btn-flat btn-primary ink-reaction">Concluir</button>
 											</div>
 										</div>
 									</div><!--end .card -->
@@ -139,4 +139,43 @@
         </div><!--end .col -->
     </div><!--end .row -->
     <!-- END VERTICAL FORM FLOATING LABELS -->
+
+    <script type="text/javascript">
+        cep_value = document.getElementById("id_zipcode");
+        logradouro = document.getElementById("id_public_place");
+        bairro = document.getElementById("id_neighborhood");
+        localidade = document.getElementById("id_city");
+        uf = document.getElementById("id_state");
+        //country = document.getElementById("id_country");
+        logradouro.readOnly = true;
+        bairro.readOnly = true;
+        localidade.readOnly = true;
+        uf.readOnly = true;
+       //country.readOnly = true;
+        cep_value.addEventListener("keyup",function(event){
+            if (this.value.length == 8){
+                headers = new Headers();
+                headers.append("Access-Control-Allow-Origin","*")
+                data = fetch("https://viacep.com.br/ws/"+ this.value +"/json/",headers)
+                    .then(function(response){
+                        Promise.resolve(response.json()).then(function(value){
+                            logradouro.value = value.logradouro;
+                            bairro.value = value.bairro;
+                            localidade.value = value.localidade;
+                            uf.value = value.uf;
+                            //country.value = 'Brasil';
+                            // Adiciona a classe 'active' aos campos já preenchidos, isto faz com que o
+                            // 'label' do campo fique 'alto'
+                            document.getElementById("id_neighborhood_container").childNodes[3].className='active';
+                            document.getElementById("id_public_place_container").childNodes[3].className='active';
+                            document.getElementById("id_city_container").childNodes[3].className='active';
+                            document.getElementById("id_state_container").childNodes[3].className='active';
+                        });
+                    }).catch(function(error){
+                        console.log(error);
+                    });
+            }
+        });
+
+    </script>
 {% endblock content %}
