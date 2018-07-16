@@ -41,16 +41,13 @@
                                     {% for person in persons %}
                                         <tr>
                                             <!--<td>-->
-                                                <!--<a href="{{ conta.get_absolute_url }}">{{ conta.classification|linebreaks }}</a>-->
+                                                <!--<a href="{{ person.get_absolute_url }}">{{ person.id|linebreaks }}</a>-->
                                             <!--</td>-->
                                             <td></td>
                                             <td>{{ person.id|linebreaks }}</td>
                                             <td>{{ person.name|linebreaks }}</td>
                                             <td>{{ person.public_place|linebreaks }}</td>
                                             <td>{{ person.number|linebreaks }}</td>
-                                            <!--<td>{{ conta.sn|linebreaks }}</td>-->
-                                            <!--<td>{{ conta.n|linebreaks }}</td>-->
-                                            <!--<td>{{ conta.source|linebreaks }}</td>-->
                                             <td>{{ person.neighborhood|linebreaks }}</td>
 
                                         </tr>
