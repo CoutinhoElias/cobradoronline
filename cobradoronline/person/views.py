@@ -31,9 +31,9 @@ def person_list(request):
     print(request.GET)
     if q:
         print(q)
-        person = Person.objects.filter(name__icontains=q)
+        persons = Person.objects.filter(name__icontains=q)
     else:
-        person = Person.objects.all()
-    context = {'person': person}
+        persons = Person.objects.all()
+    context = {'persons': persons}
     print(context)
     return render(request, 'person_list.html', context)

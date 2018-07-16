@@ -28,29 +28,30 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Classificação</th>
-                                        <!--<th>N.Classificação</th>-->
-                                        <th>Descrição</th>
-                                        <th>Cód.</th>
+                                        <th>Código</th>
+                                        <th>Nome</th>
+                                        <th>Endereço</th>
+                                        <th>Nº</th>
                                         <!--<th>SN</th>-->
                                         <!--<th>N</th>-->
-                                        <th>Origem</th>
+                                        <th>Bairro</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for conta in planodecontas %}
+                                    {% for person in persons %}
                                         <tr>
                                             <!--<td>-->
                                                 <!--<a href="{{ conta.get_absolute_url }}">{{ conta.classification|linebreaks }}</a>-->
                                             <!--</td>-->
                                             <td></td>
-                                            <td>{{ conta.classification|linebreaks }}</td>
-                                            <td>{{ conta.name|linebreaks }}</td>
-                                            <td>{{ conta.reduced_account|linebreaks }}</td>
+                                            <td>{{ person.id|linebreaks }}</td>
+                                            <td>{{ person.name|linebreaks }}</td>
+                                            <td>{{ person.public_place|linebreaks }}</td>
+                                            <td>{{ person.number|linebreaks }}</td>
                                             <!--<td>{{ conta.sn|linebreaks }}</td>-->
                                             <!--<td>{{ conta.n|linebreaks }}</td>-->
                                             <!--<td>{{ conta.source|linebreaks }}</td>-->
-                                            <td>{{ conta.account_type|linebreaks }}</td>
+                                            <td>{{ person.neighborhood|linebreaks }}</td>
 
                                         </tr>
                                     {% empty %}
