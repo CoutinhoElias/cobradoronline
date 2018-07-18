@@ -210,73 +210,119 @@
 						</li><!--end /menu-li -->
 						<!-- END NULL -->
 
-						<!-- BEGIN TABLES -->
 						<li class="gui-folder">
-							<a>
-								<div class="gui-icon"><i class="fa fa-table"></i></div>
-								<span class="title">CRM</span>
+							<a href="https://cobradoronline.herokuapp.com/admin/">
+								<div class="gui-icon"><i class="fa fa-font"></i></div>
+								<span class="title">Administrador</span>
 							</a>
-							<!--start submenu -->
-							<ul>
-								<li><a href="{% url 'person:person_create' %}" ><span class="title">Cliente</span></a></li>
-								<li><a href="{% url 'bookings:bookings_list' %}" ><span class="title">Agenda</span></a></li>
-								<li><a href="{% url 'bookings:scheduling' %}" ><span class="title">Agendamento</span></a></li>
-							</ul><!--end /submenu -->
 						</li><!--end /menu-li -->
 						<!-- END TABLES -->
 
-						<!-- BEGIN CONTABIL -->
-						<li class="gui-folder">
-							<a>
-								<div class="gui-icon"><i class="fa fa-folder-open fa-fw"></i></div>
-								<span class="title">CONTÁBIL</span>
-							</a>
-							<!--start submenu -->
-							<ul>
-								<li><a href="#"><span class="title">Lançamentos</span></a></li>
-								<li><a href="#"><span class="title">Relatórios</span></a></li>
-								<li class="gui-folder">
-									<a href="javascript:void(0);">
-										<span class="title">Plano de Contas</span>
-									</a>
-									<!--start submenu -->
-									<ul>
-										<li><a href="{% url 'bolsa:planodecontas_list'  %}"><span class="title">Listar</span></a></li>
-										<li><a href="{% url 'bolsa:simple_upload'  %}"><span class="title">Importar</span></a></li>
-										<li class="gui-folder">
-											<a href="javascript:void(0);">
-												<span class="title">Exportar</span>
-											</a>
-											<!--start submenu -->
-											<ul>
-												<li><a href="{% url 'bolsa:planodecontas_export'  %}"><span class="title">Contábil Alterdata</span></a></li>
-												<li><a href="#"><span class="title">Excel</span></a></li>
-												<li class="gui-folder">
-													<a href="javascript:void(0);">
-														<span class="title">Outro nível</span>
-													</a>
-													<!--start submenu -->
-													<ul>
-														<li><a href="#"><span class="title">Item 4</span></a></li>
-														<li class="gui-folder">
-															<a href="javascript:void(0);">
-																<span class="title">Open level 5</span>
-															</a>
-															<!--start submenu -->
-															<ul>
-																<li><a href="#"><span class="title">Item 5</span></a></li>
-																<li><a href="#"><span class="title">Item 5</span></a></li>
-															</ul><!--end /submenu -->
-														</li><!--end /submenu-li -->
-													</ul><!--end /submenu -->
-												</li><!--end /submenu-li -->
-											</ul><!--end /submenu -->
-										</li><!--end /submenu-li -->
-									</ul><!--end /submenu -->
-								</li><!--end /submenu-li -->
-							</ul><!--end /submenu -->
-						</li><!--end /menu-li -->
-                        <!-- END CONTABIL -->
+							<!-- BEGIN TABLES -->
+							<li class="gui-folder">
+								<a>
+									<div class="gui-icon"><i class="fa fa-table"></i></div>
+									<span class="title">CRM</span>
+								</a>
+								<!--start submenu -->
+								<ul>
+									<li><a href="{% url 'bookings:bookings_list' %}" ><span class="title">Agenda</span></a></li>
+									<li><a href="{% url 'bookings:scheduling' %}" ><span class="title">Agendamento</span></a></li>
+									<li class="gui-folder">
+										<a href="javascript:void(0);">
+											<span class="title">Clientes</span>
+										</a>
+										<!--start submenu -->
+										<ul>
+											<li><a href="{% url 'person:person_create' %}" ><span class="title">Novo</span></a></li>
+											<li><a href="{% url 'person:person_list' %}"><span class="title">Listar</span></a></li>
+											<!--<li class="gui-folder">-->
+												<!--<a href="javascript:void(0);">-->
+													<!--<span class="title">Exportar</span>-->
+												<!--</a>-->
+												<!--&lt;!&ndash;start submenu &ndash;&gt;-->
+												<!--<ul>-->
+													<!--<li><a href="{% url 'bolsa:planodecontas_export'  %}"><span class="title">Contábil Alterdata</span></a></li>-->
+													<!--<li><a href="#"><span class="title">Excel</span></a></li>-->
+													<!--<li class="gui-folder">-->
+														<!--<a href="javascript:void(0);">-->
+															<!--<span class="title">Outro nível</span>-->
+														<!--</a>-->
+														<!--&lt;!&ndash;start submenu &ndash;&gt;-->
+														<!--<ul>-->
+															<!--<li><a href="#"><span class="title">Item 4</span></a></li>-->
+															<!--<li class="gui-folder">-->
+																<!--<a href="javascript:void(0);">-->
+																	<!--<span class="title">Open level 5</span>-->
+																<!--</a>-->
+																<!--&lt;!&ndash;start submenu &ndash;&gt;-->
+																<!--<ul>-->
+																	<!--<li><a href="#"><span class="title">Item 5</span></a></li>-->
+																	<!--<li><a href="#"><span class="title">Item 5</span></a></li>-->
+																<!--</ul>&lt;!&ndash;end /submenu &ndash;&gt;-->
+															<!--</li>&lt;!&ndash;end /submenu-li &ndash;&gt;-->
+														<!--</ul>&lt;!&ndash;end /submenu &ndash;&gt;-->
+													<!--</li>&lt;!&ndash;end /submenu-li &ndash;&gt;-->
+												<!--</ul>&lt;!&ndash;end /submenu &ndash;&gt;-->
+											<!--</li>&lt;!&ndash;end /submenu-li &ndash;&gt;-->
+										</ul><!--end /submenu -->
+									</li><!--end /submenu-li -->
+								</ul><!--end /submenu -->
+							</li><!--end /menu-li -->
+							<!-- END TABLES -->
+
+							<!-- BEGIN CONTABIL -->
+							<li class="gui-folder">
+								<a>
+									<div class="gui-icon"><i class="fa fa-folder-open fa-fw"></i></div>
+									<span class="title">CONTÁBIL</span>
+								</a>
+								<!--start submenu -->
+								<ul>
+									<li><a href="#"><span class="title">Lançamentos</span></a></li>
+									<li><a href="#"><span class="title">Relatórios</span></a></li>
+									<li class="gui-folder">
+										<a href="javascript:void(0);">
+											<span class="title">Plano de Contas</span>
+										</a>
+										<!--start submenu -->
+										<ul>
+											<li><a href="{% url 'bolsa:planodecontas_list'  %}"><span class="title">Listar</span></a></li>
+											<li><a href="{% url 'bolsa:simple_upload'  %}"><span class="title">Importar</span></a></li>
+											<li class="gui-folder">
+												<a href="javascript:void(0);">
+													<span class="title">Exportar</span>
+												</a>
+												<!--start submenu -->
+												<ul>
+													<li><a href="{% url 'bolsa:planodecontas_export'  %}"><span class="title">Contábil Alterdata</span></a></li>
+													<li><a href="#"><span class="title">Excel</span></a></li>
+													<li class="gui-folder">
+														<a href="javascript:void(0);">
+															<span class="title">Outro nível</span>
+														</a>
+														<!--start submenu -->
+														<ul>
+															<li><a href="#"><span class="title">Item 4</span></a></li>
+															<li class="gui-folder">
+																<a href="javascript:void(0);">
+																	<span class="title">Open level 5</span>
+																</a>
+																<!--start submenu -->
+																<ul>
+																	<li><a href="#"><span class="title">Item 5</span></a></li>
+																	<li><a href="#"><span class="title">Item 5</span></a></li>
+																</ul><!--end /submenu -->
+															</li><!--end /submenu-li -->
+														</ul><!--end /submenu -->
+													</li><!--end /submenu-li -->
+												</ul><!--end /submenu -->
+											</li><!--end /submenu-li -->
+										</ul><!--end /submenu -->
+									</li><!--end /submenu-li -->
+								</ul><!--end /submenu -->
+							</li><!--end /menu-li -->
+							<!-- END CONTABIL -->
 
 					</ul><!--end .main-menu -->
 					<!-- END MAIN MENU -->

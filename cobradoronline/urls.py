@@ -12,5 +12,5 @@ urlpatterns = [
     url(r'^cliente/', include('cobradoronline.person.urls', namespace='person')),
     url(r'^bookings/', include('cobradoronline.bookings.urls', namespace='bookings')),
     url(r'^api/bookings/', include('cobradoronline.bookings.api.urls', namespace='booking-api')),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='administrador'),
 ]
