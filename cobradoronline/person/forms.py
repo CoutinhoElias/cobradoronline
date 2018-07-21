@@ -11,6 +11,7 @@ class PersonForm(forms.ModelForm):
     state = forms.CharField(label='Estado', widget=AdminTextInputWidget(attrs={'class':'form-control'}))
     zipcode = forms.CharField(label='Cep', widget=AdminTextInputWidget(attrs={'class':'form-control'}))
     neighborhood = forms.CharField(label='Bairro', widget=AdminTextInputWidget(attrs={'class':'form-control'}))
+    balance = forms.CharField(label='Saldo', widget=AdminTextInputWidget(attrs={'class': 'form-control'}))
     #class="form-control"
     class Meta:
         model = Person

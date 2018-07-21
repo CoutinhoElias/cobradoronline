@@ -28,11 +28,18 @@
                                                         <label for="{{ form.zipcode.id_for_label}}">{{form.zipcode.label}}</label>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-3">
 													<div class="form-group">
                                                         {{form.number.errors}}
                                                         {{form.number}}
                                                         <label for="{{ form.number.id_for_label}}">{{form.number.label}}</label>
+													</div>
+												</div>
+												<div class="col-sm-3">
+													<div class="form-group">
+                                                        {{form.balance.errors}}
+                                                        {{form.balance}}
+                                                        <label for="{{ form.balance.id_for_label}}">{{form.balance.label}}</label>
 													</div>
 												</div>
 											</div>
@@ -146,6 +153,7 @@
         bairro = document.getElementById("id_neighborhood");
         localidade = document.getElementById("id_city");
         uf = document.getElementById("id_state");
+        balance = '0'
         //country = document.getElementById("id_country");
         // logradouro.readOnly = true;
         // bairro.readOnly = true;
@@ -163,6 +171,7 @@
                             bairro.value = value.bairro;
                             localidade.value = value.localidade;
                             uf.value = value.uf;
+                            balance.value = 0;
                             //country.value = 'Brasil';
                             // Adiciona a classe 'active' aos campos já preenchidos, isto faz com que o
                             // 'label' do campo fique 'alto'
@@ -170,6 +179,7 @@
                             document.getElementById("id_public_place_container").childNodes[3].className='active';
                             document.getElementById("id_city_container").childNodes[3].className='active';
                             document.getElementById("id_state_container").childNodes[3].className='active';
+                            document.getElementById("id_balance_container").childNodes[3].className='active';
                         });
                     }).catch(function(error){
                         console.log(error);
