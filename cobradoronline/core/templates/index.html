@@ -31,6 +31,7 @@
 		<script type="text/javascript" src="{% static 'js/libs/utils/respond.min.js' %}"></script>
         <script src="{% static 'js/libs/fullcalendar/lang/pt-br.js' %}"></script>
 		<script src="{% static 'bookings/bookings.js' %}"></script>
+		<script src="{% static 'js/libs/select2/select2.min.js' %}"></script>
 
 		<![endif]-->
 	</head>
@@ -236,6 +237,7 @@
 										<ul>
 											<li><a href="{% url 'person:person_create' %}" ><span class="title">Novo</span></a></li>
 											<li><a href="{% url 'person:person_list' %}"><span class="title">Listar</span></a></li>
+											<li><a href="{% url 'person:movement_create' %}"><span class="title">Lançar Movimento</span></a></li>
 											<!--<li class="gui-folder">-->
 												<!--<a href="javascript:void(0);">-->
 													<!--<span class="title">Exportar</span>-->

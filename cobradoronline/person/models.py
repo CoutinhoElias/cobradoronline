@@ -41,6 +41,9 @@ class Person(models.Model):
 
     def get_absolute_url(self):
         return 'cliente/novo/'
+    #
+    # def get_absolute_url(self):
+    #     return reverse('persons:person_edit', args=[str(self.id)])
 
 
 class Movimento(models.Model):
