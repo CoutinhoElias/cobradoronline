@@ -35,6 +35,11 @@ class MovimentoForm(forms.ModelForm):
     transaction_kind = forms.ChoiceField(label='Tipo Movimento', widget=forms.Select(attrs={'class': 'form-control'}), required=True, choices=TRANSACTION_KIND)
     value_moved = forms.DecimalField(label='Valor Movimentado', widget=AdminTextInputWidget(attrs={'class': 'form-control input-lg'}) , max_digits=10, decimal_places=2)
 
+    def __init__(self, *args, **kwargs):
+        super(MovimentoForm, self).__init__(*args, **kwargs)
+        self.fields['value_moved'].localize = True
+        self.fields['value_moved'].widget.is_localized = True
+
     class Meta:
         model = Movimento
         exclude = ['created','modified']

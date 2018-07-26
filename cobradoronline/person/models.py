@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 
 TRANSACTION_KIND = (
     ("in", "Cliente Pagou"),
@@ -39,11 +39,11 @@ class Person(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return 'cliente/novo/'
-    #
     # def get_absolute_url(self):
-    #     return reverse('persons:person_edit', args=[str(self.id)])
+    #     return 'cliente/novo/'
+    #
+    def get_absolute_url(self):
+        return reverse('person:person_view', args=[str(self.id)])
 
 
 class Movimento(models.Model):

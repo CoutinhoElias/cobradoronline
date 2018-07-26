@@ -1,0 +1,82 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="col-lg-offset-1 col-md-10">
+        									<div class="card">
+										<div class="card-head style-primary">
+											<header>Relatório de Cliente</header>
+										</div>
+										<div class="card-body">
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="form-group">
+                          
+                                                        {{person.name}}
+                                                        <label for="{{ person.name.id_for_label}}">{{person.name.label}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+                                                        {{person.zipcode.errors}}
+                                                        {{person.zipcode}}
+                                                        <label for="{{ person.zipcode.id_for_label}}">{{person.zipcode.label}}</label>
+													</div>
+												</div>
+												<div class="col-sm-3">
+													<div class="form-group">
+                                                        {{person.number.errors}}
+                                                        {{person.number}}
+                                                        <label for="{{ person.number.id_for_label}}">{{person.number.label}}</label>
+													</div>
+												</div>
+												<div class="col-sm-3">
+													<div class="form-group">
+                                                        {{person.balance.errors}}
+                                                        {{person.balance}}
+                                                        <label for="{{ person.balance.id_for_label}}">{{person.balance.label}}</label>
+													</div>
+												</div>
+											</div>
+
+                                            <div class="row">
+												<div class="col-sm-8">
+													<div class="form-group">
+                                                        {{person.public_place.errors}}
+                                                        {{person.public_place}}
+                                                        <label for="{{ person.public_place.id_for_label}}">{{person.public_place.label}}</label>
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+                                                        {{person.neighborhood.errors}}
+                                                        {{person.neighborhood}}
+                                                        <label for="{{ person.neighborhood.id_for_label}}">{{person.neighborhood.label}}</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+                                                        {{person.city.errors}}
+                                                        {{person.city}}
+                                                        <label for="{{ person.city.id_for_label}}">{{person.city.label}}</label>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+                                                        {{person.state.errors}}
+                                                        {{person.state}}
+                                                        <label for="{{ person.state.id_for_label}}">{{person.state.label}}</label>
+													</div>
+												</div>
+											</div>
+										</div><!--end .card-body -->
+
+    </div><!--end .row -->
+    <!-- END VERTICAL FORM FLOATING LABELS -->
+
+{% endblock content %}

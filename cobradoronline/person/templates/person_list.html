@@ -41,11 +41,12 @@
                                 <tbody>
                                     {% for person in persons %}
                                         <tr>
-                                            <!--<td>-->
+                                            <td>
                                                 <!--<a href="{{ person.get_absolute_url }}">{{ person.id|linebreaks }}</a>-->
-                                            <!--</td>-->
-                                            <td></td>
-                                            <td>{{ person.id|linebreaks }}</td>
+                                            </td>
+                                            <td>
+                                                <a href="{{ person.get_absolute_url }}">{{ person.id|linebreaks }}</a>
+                                            </td>
                                             <td>{{ person.name|linebreaks }}</td>
                                             <td>{{ person.balance|linebreaks }}</td>
                                             <td>{{ person.public_place|linebreaks }}</td>
