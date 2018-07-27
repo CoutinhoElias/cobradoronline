@@ -2,81 +2,95 @@
 
 {% block content %}
     <div class="col-lg-offset-1 col-md-10">
-        									<div class="card">
-										<div class="card-head style-primary">
-											<header>Relatório de Cliente</header>
-										</div>
-										<div class="card-body">
-											<div class="row">
-												<div class="col-sm-12">
-													<div class="form-group">
-                          
-                                                        {{person.name}}
-                                                        <label for="{{ person.name.id_for_label}}">{{person.name.label}}</label>
-													</div>
-												</div>
-											</div>
+		<div class="card">
+			<div class="card-head style-primary">
+				<header>Resumo do Cliente</header>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-12">
+							<label class="text-bold">Nome:</label>{{person.name}}
+					</div>
+				</div>
 
-											<div class="row">
-												<div class="col-sm-6">
-													<div class="form-group">
-                                                        {{person.zipcode.errors}}
-                                                        {{person.zipcode}}
-                                                        <label for="{{ person.zipcode.id_for_label}}">{{person.zipcode.label}}</label>
-													</div>
-												</div>
-												<div class="col-sm-3">
-													<div class="form-group">
-                                                        {{person.number.errors}}
-                                                        {{person.number}}
-                                                        <label for="{{ person.number.id_for_label}}">{{person.number.label}}</label>
-													</div>
-												</div>
-												<div class="col-sm-3">
-													<div class="form-group">
-                                                        {{person.balance.errors}}
-                                                        {{person.balance}}
-                                                        <label for="{{ person.balance.id_for_label}}">{{person.balance.label}}</label>
-													</div>
-												</div>
-											</div>
+				<div class="row">
+					<div class="col-sm-6">
+							<label class="text-bold">CEP:</label>{{person.zipcode}}
+					</div>
+					<div class="col-sm-3">
+							<label class="text-bold">Número:</label>{{person.number}}
+					</div>
+					<div class="col-sm-3">
+							<label class="text-bold">Saldo:</label>{{person.balance}}
+					</div>
+				</div>
 
-                                            <div class="row">
-												<div class="col-sm-8">
-													<div class="form-group">
-                                                        {{person.public_place.errors}}
-                                                        {{person.public_place}}
-                                                        <label for="{{ person.public_place.id_for_label}}">{{person.public_place.label}}</label>
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-                                                        {{person.neighborhood.errors}}
-                                                        {{person.neighborhood}}
-                                                        <label for="{{ person.neighborhood.id_for_label}}">{{person.neighborhood.label}}</label>
-													</div>
-												</div>
-											</div>
+				<div class="row">
+					<div class="col-sm-8">
+							<label class="text-bold">Logradouro:</label> {{person.public_place}}
+					</div>
+					<div class="col-sm-4">
+							<label class="text-bold">Bairro: </label>{{person.neighborhood}}
+					</div>
+				</div>
 
-											<div class="row">
-												<div class="col-sm-6">
-													<div class="form-group">
-                                                        {{person.city.errors}}
-                                                        {{person.city}}
-                                                        <label for="{{ person.city.id_for_label}}">{{person.city.label}}</label>
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-                                                        {{person.state.errors}}
-                                                        {{person.state}}
-                                                        <label for="{{ person.state.id_for_label}}">{{person.state.label}}</label>
-													</div>
-												</div>
-											</div>
-										</div><!--end .card-body -->
+				<div class="row">
+					<div class="col-sm-6">
+							<label class="text-bold">Cidade:</label> {{person.city}}
+					</div>
+					<div class="col-sm-6">
+							<label class="text-bold">UF:</label>{{person.state}}
+					</div>
+				</div>
+			</div><!--end .card-body -->
 
     </div><!--end .row -->
-    <!-- END VERTICAL FORM FLOATING LABELS -->
+
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-head style-primary">
+                        <header>Tabela de movimentos</header>
+                    </div>
+                    <div class="card-body no-padding">
+                        <div class="table-responsive no-margin">
+                            <table class="table table-striped no-margin">
+                                <thead>
+                                    <tr>
+                                        <!--<th>#</th>-->
+                                        <th>Tipo</th>
+                                        <th>Movimento</th>
+                                        <th>Criado em</th>
+                                        <th>Modificadoem</th>
+                                </thead>
+                                <tbody>
+                                    {% for movement in movements %}
+                                        <tr>
+                                            <td>{% if movement.transaction_kind == 'out'%}
+                                                    <i class="fa fa-minus-circle"></i>
+                                                {% elif movement.transaction_kind == 'in' %}
+                                                    <i class="fa fa-plus-circle"></i>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ movement.value_moved|floatformat:"2" }}</td>
+                                            <td>{{ movement.created|date:"d/m/Y" }}</td>
+                                            <td>{{ movement.modified|date:"d/m/Y" }}</td>
+                                        </tr>
+                                    {% empty %}
+                                        <li>
+                                            Sem registros
+                                        </li>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div><!--end .table-responsive -->
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+            </div><!--end .col -->
+        </div><!--end .row -->
+    </div>
 
 {% endblock content %}

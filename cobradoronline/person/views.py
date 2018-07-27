@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from cobradoronline.person.forms import PersonForm, MovimentoForm
-from cobradoronline.person.models import Person
+from cobradoronline.person.models import Person, Movimento
 
 
 def person_create(request):
@@ -41,8 +41,11 @@ def person_list(request):
 
 def person_view(request, id):
     person = Person.objects.get(id=id)
+    movements = Movimento.objects.filter(person_id=id)
+
     context = {
-        'person':person
+        'person':person,
+        'movements':movements
     }
     return render(request, 'person_view.html', context)
 
