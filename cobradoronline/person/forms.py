@@ -15,9 +15,18 @@ class PersonForm(forms.ModelForm):
     zipcode = forms.CharField(label='Cep', widget=AdminTextInputWidget(attrs={'class':'form-control input-lg'}))
     neighborhood = forms.CharField(label='Bairro', widget=AdminTextInputWidget(attrs={'class':'form-control input-lg'}))
     balance = forms.DecimalField(label='Saldo', widget=AdminTextInputWidget(attrs={'class': 'form-control input-lg'}))
+    date_of_turn = forms.DateField(label='Dt. Giro', widget=forms.TextInput(attrs={'class': 'form-control input-lg'}))
+    date_return = forms.DateField(label='Dt. Retorno', widget=forms.TextInput(attrs={'class': 'form-control input-lg'}))
     #class="form-control input-lg"
+
+    def __init__(self, *args, **kwargs):
+        super(PersonForm, self).__init__(*args, **kwargs)
+        self.fields['balance'].localize = True
+        self.fields['balance'].widget.is_localized = True
+
     class Meta:
         model = Person
+        exclude = ['date_return']
         fields = '__all__'
 
 
@@ -34,6 +43,7 @@ class MovimentoForm(forms.ModelForm):
     person = forms.ModelChoiceField(label='Pessoa', widget=forms.Select(attrs={'class': 'form-control'}), required=True, queryset=Person.objects.all())
     transaction_kind = forms.ChoiceField(label='Tipo Movimento', widget=forms.Select(attrs={'class': 'form-control'}), required=True, choices=TRANSACTION_KIND)
     value_moved = forms.DecimalField(label='Valor Movimentado', widget=AdminTextInputWidget(attrs={'class': 'form-control input-lg'}) , max_digits=10, decimal_places=2)
+    date_return = forms.DateField(label='Dt. Retorno', widget=forms.TextInput(attrs={'class': 'form-control input-lg'}))
 
     def __init__(self, *args, **kwargs):
         super(MovimentoForm, self).__init__(*args, **kwargs)

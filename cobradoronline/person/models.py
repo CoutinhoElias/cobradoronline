@@ -18,6 +18,8 @@ class Person(models.Model):
     state = models.CharField('Estado',max_length=150)
     zipcode = models.CharField('Cep',max_length=10)
     neighborhood = models.CharField('Bairro',max_length=50)
+    date_of_turn = models.DateField('Dt. Giro')
+    date_return = models.DateField('Dt. Retorno')
 
 
     class Meta:
@@ -52,6 +54,7 @@ class Movimento(models.Model):
     value_moved = models.DecimalField('Valor Movimento', max_digits=10, decimal_places=2)
     created = models.DateTimeField('created', auto_now_add=True)
     modified = models.DateTimeField('modified', auto_now=True)
+    date_return = models.DateField('Dt. Retorno')
 
     class Meta:
         verbose_name = 'Movimento'
@@ -61,13 +64,16 @@ def post_save_movimento(sender, instance, created,  **kwargs):
     if created:
         if instance.transaction_kind == 'in' or instance.transaction_kind == 'eaj':
             instance.person.balance += instance.value_moved
+            instance.person.date_return = instance.date_return
             instance.person.save()
         else:
             instance.person.balance -= instance.value_moved
+            instance.person.date_return = instance.date_return
             instance.person.save()
     else:
         instance.person.balance -= instance.person.balance
         instance.person.balance += instance.person.stock_avaliable()
+        instance.person.date_return = instance.date_return
         instance.person.save()
 
 models.signals.post_save.connect(

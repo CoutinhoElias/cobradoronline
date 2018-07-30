@@ -19,20 +19,32 @@
 
 
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
                                                         {{form.transaction_kind.errors}}
                                                         {{form.transaction_kind}}
                                                         <label for="{{ form.transaction_kind.id_for_label}}">{{form.transaction_kind.label}}</label>
 													</div>
 												</div>
-												<div class="col-sm-6">
+
+												<div class="col-sm-4">
 													<div class="form-group">
                                                         {{form.value_moved.errors}}
                                                         {{form.value_moved}}
                                                         <label for="{{ form.value_moved.id_for_label}}">{{form.value_moved.label}}</label>
 													</div>
 												</div>
+
+                                                <div class="form-group control-width-normal col-sm-4">
+                                                    <div class="input-group date" id="datepicker">
+                                                     <div class="input-group-content">
+                                                        {{form.date_return.errors}}
+                                                        {{form.date_return}}
+                                                        <label for="{{form.date_return.id_for_label}}">{{form.date_return.label}}</label>
+                                                    </div>
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div><!--end .form-group -->
 											</div>
 										</div><!--end .card-body -->
 										<div class="card-actionbar">
@@ -40,6 +52,8 @@
 												<button type="submit" class="btn btn-flat btn-primary ink-reaction">Concluir</button>
 											</div>
 										</div>
+
+
 									</div><!--end .card -->
 									<em class="text-caption">Vertical layout with static labels</em>
 								</form>
@@ -104,3 +118,14 @@
     <!-- END VERTICAL FORM FLOATING LABELS -->
 
 {% endblock content %}
+
+{% block extrajs %}
+    <script>
+        $('#multi-select').multiSelect({});
+        $('#datepicker').datepicker({
+            format: 'dd/mm/yyyy'
+            //,startDate: '-3d'
+        });
+        $('#select').select2({});
+    </script>
+{% endblock extrajs %}

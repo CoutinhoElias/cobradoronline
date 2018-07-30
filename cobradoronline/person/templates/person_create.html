@@ -9,15 +9,31 @@
 										<div class="card-head style-primary">
 											<header>Cadastro de Cliente</header>
 										</div>
+
 										<div class="card-body">
 											<div class="row">
-												<div class="col-sm-12">
+
+												<div class="col-sm-8">
 													<div class="form-group">
                                                         {{form.name.errors}}
                                                         {{form.name}}
                                                         <label for="{{ form.name.id_for_label}}">{{form.name.label}}</label>
 													</div>
 												</div>
+
+
+
+                                                <div class="form-group control-width-normal col-sm-4">
+                                                    <div class="input-group date" id="datepicker">
+                                                     <div class="input-group-content">
+                                                        {{form.date_of_turn.errors}}
+                                                        {{form.date_of_turn}}
+                                                        <label for="{{form.date_of_turn.id_for_label}}">{{form.date_of_turn.label}}</label>
+                                                    </div>
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div><!--end .form-group -->
+
 											</div>
 
 											<div class="row">
@@ -187,5 +203,17 @@
             }
         });
 
+
     </script>
 {% endblock content %}
+
+{% block extrajs %}
+    <script>
+        $('#multi-select').multiSelect({});
+        $('#datepicker').datepicker({
+            format: 'dd/mm/yyyy'
+            //,startDate: '-3d'
+        });
+        $('#select').select2({});
+    </script>
+{% endblock extrajs %}
