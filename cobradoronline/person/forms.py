@@ -16,7 +16,7 @@ class PersonForm(forms.ModelForm):
     neighborhood = forms.CharField(label='Bairro', widget=AdminTextInputWidget(attrs={'class':'form-control input-lg'}))
     balance = forms.DecimalField(label='Saldo', widget=AdminTextInputWidget(attrs={'class': 'form-control input-lg'}))
     date_of_turn = forms.DateField(label='Dt. Giro', widget=forms.TextInput(attrs={'class': 'form-control input-lg'}))
-    date_return = forms.DateField(label='Dt. Retorno', widget=forms.TextInput(attrs={'class': 'form-control input-lg'}))
+    date_return = forms.DateField(required=False)
     #class="form-control input-lg"
 
     def __init__(self, *args, **kwargs):

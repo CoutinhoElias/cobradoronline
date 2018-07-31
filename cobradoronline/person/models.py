@@ -10,16 +10,16 @@ TRANSACTION_KIND = (
 
 # Create your models here.
 class Person(models.Model):
-    name = models.CharField('Nome',max_length=100)
+    name = models.CharField('Nome',max_length=100, uppercase=True)
     balance = models.DecimalField('Saldo', max_digits=10, decimal_places=2)
-    public_place = models.CharField('Logradouro',max_length=150)
+    public_place = models.CharField('Logradouro',max_length=150, uppercase=True)
     number = models.CharField('Número',max_length=150)
-    city = models.CharField('Cidade',max_length=150)
-    state = models.CharField('Estado',max_length=150)
+    city = models.CharField('Cidade',max_length=150, uppercase=True)
+    state = models.CharField('Estado',max_length=150, uppercase=True)
     zipcode = models.CharField('Cep',max_length=10)
-    neighborhood = models.CharField('Bairro',max_length=50)
+    neighborhood = models.CharField('Bairro',max_length=50, uppercase=True)
     date_of_turn = models.DateField('Dt. Giro')
-    date_return = models.DateField('Dt. Retorno')
+    date_return = models.DateField('Dt. Retorno', null=True, blank=True)
 
 
     class Meta:
