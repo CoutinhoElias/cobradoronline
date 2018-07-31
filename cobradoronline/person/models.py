@@ -18,8 +18,8 @@ class Person(models.Model):
     state = models.CharField('Estado',max_length=150)
     zipcode = models.CharField('Cep',max_length=10)
     neighborhood = models.CharField('Bairro',max_length=50)
-    date_of_turn = models.DateField('Dt. Giro')
-    date_return = models.DateField('Dt. Retorno', null=True, blank=True)
+    date_of_turn = models.DateField('Dt. Giro.')
+    date_return = models.DateField('Dt. Retorno.', null=True, blank=True)
 
 
     class Meta:
@@ -54,7 +54,7 @@ class Movimento(models.Model):
     value_moved = models.DecimalField('Valor Movimento', max_digits=10, decimal_places=2)
     created = models.DateTimeField('created', auto_now_add=True)
     modified = models.DateTimeField('modified', auto_now=True)
-    date_return = models.DateField('Dt. Retorno')
+    date_return = models.DateField('Dt. Retorno..')
 
     class Meta:
         verbose_name = 'Movimento'
