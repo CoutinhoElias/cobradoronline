@@ -1,7 +1,12 @@
+import datetime
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
+from django.utils.datetime_safe import date
+from django.utils.timezone import now
+
 from cobradoronline.person.forms import PersonForm, MovimentoForm
 from cobradoronline.person.models import Person, Movimento
 
@@ -24,8 +29,32 @@ def person_create(request):
     else:
         context = {'form': PersonForm()}
         return render(request, 'person_create.html', context)
+
+def person_return(request):
+    q = request.GET.get('searchInput')
+    print(request.GET)
+    if q:
+        print(q)
+        persons = Person.objects.filter(name__icontains=q, date_return__lte=now())
+    else:
+        persons = Person.objects.filter(date_return__lte=now())
+    context = {'persons': persons}
+    print(context)
+    return render(request, 'person_return.html', context)
     
-    
+def person_turn(request):
+    q = request.GET.get('searchInput')
+    print(request.GET)
+    if q:
+        print(q)
+        persons = Person.objects.filter(name__icontains=q, date_of_turn__lte=now())
+    else:
+        persons = Person.objects.filter(date_of_turn__lte=now())
+    context = {'persons': persons}
+    print(context)
+    return render(request, 'person_turn.html', context)
+
+
 def person_list(request):
     q = request.GET.get('searchInput')
     print(request.GET)
@@ -37,7 +66,6 @@ def person_list(request):
     context = {'persons': persons}
     print(context)
     return render(request, 'person_list.html', context)
-
 
 def person_view(request, id):
     person = Person.objects.get(id=id)
