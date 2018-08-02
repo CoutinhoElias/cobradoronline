@@ -30,6 +30,7 @@ def person_create(request):
         context = {'form': PersonForm()}
         return render(request, 'person_create.html', context)
 
+
 def person_return(request):
     q = request.GET.get('searchInput')
     print(request.GET)

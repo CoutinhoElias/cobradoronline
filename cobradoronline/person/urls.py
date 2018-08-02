@@ -6,6 +6,7 @@ from cobradoronline.person.views import person_create, person_list, movement_cre
 
 app_name = 'person'
 
+
 urlpatterns = [
     url(r'novo/$', person_create, name='person_create'),
     url(r'consultar/(?P<id>\d+)/$', person_view, name='person_view'),
