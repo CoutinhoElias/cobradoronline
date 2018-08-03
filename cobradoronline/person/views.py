@@ -33,7 +33,7 @@ def person_create(request):
 
 def person_return(request):
     q = request.GET.get('searchInput')
-    print(request.GET)
+    #print(request.GET)
     if q:
         print(q)
         persons = Person.objects.filter(name__icontains=q, date_return__lte=now())
@@ -45,7 +45,7 @@ def person_return(request):
     
 def person_turn(request):
     q = request.GET.get('searchInput')
-    print(request.GET)
+    #print(request.GET)
     if q:
         print(q)
         persons = Person.objects.filter(name__icontains=q, date_of_turn__lte=now())
@@ -58,7 +58,7 @@ def person_turn(request):
 
 def person_list(request):
     q = request.GET.get('searchInput')
-    print(request.GET)
+    #print(request.GET)
     if q:
         print(q)
         persons = Person.objects.filter(name__icontains=q)

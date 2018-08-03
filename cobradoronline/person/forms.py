@@ -24,6 +24,10 @@ class PersonForm(forms.ModelForm):
         self.fields['balance'].localize = True
         self.fields['balance'].widget.is_localized = True
 
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        return name.upper()
+
     class Meta:
         model = Person
         exclude = ['date_return']
