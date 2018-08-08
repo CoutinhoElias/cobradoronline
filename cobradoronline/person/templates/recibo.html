@@ -43,9 +43,9 @@
              </div>
          <div>
          <div class='details'>
-             Bill to: <br/>
-             Amount:  <br/>
-             Date:
+             Bill to: {{person.name}}<br/>
+             Amount:  {{person.balance |floatformat:"2"}}<br/>
+             Date: {{person.date_of_turn |date:"d/m/Y"}}
              <hr class='hrItem' />
          </div>
      </div>
