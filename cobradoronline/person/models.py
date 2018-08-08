@@ -41,9 +41,6 @@ class Person(models.Model):
     def __str__(self):
         return self.name
 
-    # def get_absolute_url(self):
-    #     return 'cliente/novo/'
-    #
     def get_absolute_url(self):
         return reverse('person:person_view', args=[str(self.id)])
 

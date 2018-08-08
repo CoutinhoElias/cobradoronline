@@ -236,40 +236,49 @@
 										<!--start submenu -->
 										<ul>
 											<li><a href="{% url 'person:person_create' %}" ><span class="title">Novo</span></a></li>
-											<li><a href="{% url 'person:person_list' %}"><span class="title">Listar</span></a></li>
-											<li><a href="{% url 'person:person_turn' %}"><span class="title">Girando</span></a></li>
-											<li><a href="{% url 'person:person_return' %}"><span class="title">Rota</span></a></li>
 											<li><a href="{% url 'person:movement_create' %}"><span class="title">Lançar Movimento</span></a></li>
 
-											<!--<li class="gui-folder">-->
-												<!--<a href="javascript:void(0);">-->
-													<!--<span class="title">Exportar</span>-->
-												<!--</a>-->
-												<!--&lt;!&ndash;start submenu &ndash;&gt;-->
-												<!--<ul>-->
-													<!--<li><a href="{% url 'bolsa:planodecontas_export'  %}"><span class="title">Contábil Alterdata</span></a></li>-->
-													<!--<li><a href="#"><span class="title">Excel</span></a></li>-->
-													<!--<li class="gui-folder">-->
-														<!--<a href="javascript:void(0);">-->
-															<!--<span class="title">Outro nível</span>-->
-														<!--</a>-->
-														<!--&lt;!&ndash;start submenu &ndash;&gt;-->
-														<!--<ul>-->
-															<!--<li><a href="#"><span class="title">Item 4</span></a></li>-->
-															<!--<li class="gui-folder">-->
-																<!--<a href="javascript:void(0);">-->
-																	<!--<span class="title">Open level 5</span>-->
-																<!--</a>-->
-																<!--&lt;!&ndash;start submenu &ndash;&gt;-->
-																<!--<ul>-->
-																	<!--<li><a href="#"><span class="title">Item 5</span></a></li>-->
-																	<!--<li><a href="#"><span class="title">Item 5</span></a></li>-->
-																<!--</ul>&lt;!&ndash;end /submenu &ndash;&gt;-->
-															<!--</li>&lt;!&ndash;end /submenu-li &ndash;&gt;-->
-														<!--</ul>&lt;!&ndash;end /submenu &ndash;&gt;-->
-													<!--</li>&lt;!&ndash;end /submenu-li &ndash;&gt;-->
-												<!--</ul>&lt;!&ndash;end /submenu &ndash;&gt;-->
-											<!--</li>&lt;!&ndash;end /submenu-li &ndash;&gt;-->
+										<li class="gui-folder">
+											<a href="javascript:void(0);">
+												<span class="title">Consultas</span>
+											</a>
+											<!--start submenu -->
+											<ul>
+												<li><a href="{% url 'person:person_list' %}"><span class="title">Listar Todos</span></a></li>
+												<li><a href="{% url 'person:person_turn' %}"><span class="title">Somente Girando</span></a></li>
+												<li><a href="{% url 'person:person_return' %}"><span class="title">Rota de cobrança</span></a></li>
+											</ul><!--end /submenu -->
+										</li><!--end /submenu-li -->
+
+										<!--<li class="gui-folder">-->
+											<!--<a href="javascript:void(0);">-->
+												<!--<span class="title">Exportar</span>-->
+											<!--</a>-->
+											<!--&lt;!&ndash;start submenu &ndash;&gt;-->
+											<!--<ul>-->
+												<!--<li><a href="{% url 'bolsa:planodecontas_export'  %}"><span class="title">Contábil Alterdata</span></a></li>-->
+												<!--<li><a href="#"><span class="title">Excel</span></a></li>-->
+												<!--<li class="gui-folder">-->
+													<!--<a href="javascript:void(0);">-->
+														<!--<span class="title">Outro nível</span>-->
+													<!--</a>-->
+													<!--&lt;!&ndash;start submenu &ndash;&gt;-->
+													<!--<ul>-->
+														<!--<li><a href="#"><span class="title">Item 4</span></a></li>-->
+														<!--<li class="gui-folder">-->
+															<!--<a href="javascript:void(0);">-->
+																<!--<span class="title">Open level 5</span>-->
+															<!--</a>-->
+															<!--&lt;!&ndash;start submenu &ndash;&gt;-->
+															<!--<ul>-->
+																<!--<li><a href="#"><span class="title">Item 5</span></a></li>-->
+																<!--<li><a href="#"><span class="title">Item 5</span></a></li>-->
+															<!--</ul>&lt;!&ndash;end /submenu &ndash;&gt;-->
+														<!--</li>&lt;!&ndash;end /submenu-li &ndash;&gt;-->
+													<!--</ul>&lt;!&ndash;end /submenu &ndash;&gt;-->
+												<!--</li>&lt;!&ndash;end /submenu-li &ndash;&gt;-->
+											<!--</ul>&lt;!&ndash;end /submenu &ndash;&gt;-->
+										<!--</li>&lt;!&ndash;end /submenu-li &ndash;&gt;-->
 										</ul><!--end /submenu -->
 									</li><!--end /submenu-li -->
 								</ul><!--end /submenu -->
