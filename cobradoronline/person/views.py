@@ -1,33 +1,23 @@
 import datetime
 
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render
 
 # Create your views here.
 from django.template.loader import get_template
 
 from django.utils.timezone import now
+from datetime import datetime
+
+from django.views.generic.dates import timezone_today
 
 from cobradoronline.person.forms import PersonForm, MovimentoForm
 from cobradoronline.person.models import Person, Movimento
 
-from django.http import HttpResponse
 from django.views.generic import View
 
 from cobradoronline.utils import render_to_pdf #created in step 4
-
-# class generatePdf(View):
-#     def get(self, request, *args, **kwargs):
-#         data = {
-#             'today': datetime.date.today(),
-#             'amount': 39.99,
-#             'customer_name': 'Cooper Mann',
-#             'order_id': 1233434,
-#         }
-#         print('Passou em generatePdf')
-#         pdf = render_to_pdf('recibo.html', data)
-#         return HttpResponse(pdf, content_type='application/pdf')
-
+from django.utils.dateparse import parse_date
 
 class GeneratePDF(View):
     def get(self, request, id, *args, **kwargs):
@@ -86,7 +76,25 @@ def person_return(request):
     context = {'persons': persons}
     print(context)
     return render(request, 'person_return.html', context)
-    
+
+
+
+
+
+def movement_accountability(request):
+    q = request.GET.get('searchInput')
+    if q:
+        date_query = datetime.strptime(q, '%d/%m/%Y').date()
+        print(date_query)
+        persons = Movimento.objects.filter(created__contains=date_query)
+    else:
+        date_query = now().year, now().month, now().day
+        persons = Movimento.objects.filter(created__contains=timezone_today())
+    context = {'persons': persons}
+    print(context)
+    return render(request, 'person_accountability.html', context)
+
+
 def person_turn(request):
     q = request.GET.get('searchInput')
     #print(request.GET)
