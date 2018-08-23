@@ -1,10 +1,13 @@
 import datetime
 
+from django.db.models import Sum
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
+
 # Create your views here.
 from django.template.loader import get_template
+from django import template
 
 from django.utils.timezone import now
 from datetime import datetime
@@ -16,8 +19,7 @@ from cobradoronline.person.models import Person, Movimento
 
 from django.views.generic import View
 
-from cobradoronline.utils import render_to_pdf #created in step 4
-from django.utils.dateparse import parse_date
+from cobradoronline.utils import render_to_pdf
 
 class GeneratePDF(View):
     def get(self, request, id, *args, **kwargs):
@@ -69,7 +71,6 @@ def person_return(request):
     q = request.GET.get('searchInput')
     #print(request.GET)
     if q:
-        print(q)
         persons = Person.objects.filter(name__icontains=q, date_return__lte=now())
     else:
         persons = Person.objects.filter(date_return__lte=now())
@@ -78,21 +79,51 @@ def person_return(request):
     return render(request, 'person_return.html', context)
 
 
+register = template.Library()
 
+@register.simple_tag
+def total_venda(request):
+    q = request.GET.get('searchInput')
+    if q:
+        date_query = datetime.strptime(q, '%d/%m/%Y').date()
+        return Movimento.objects.filter(created__contains=date_query, transaction_kind__icontains='out').aggregate(total=Sum('value_moved'))
+    else:
+        #date_query = now().year, now().month, now().day
+        return Movimento.objects.filter(created__lt=timezone_today(), transaction_kind__icontains='out').aggregate(Sum('value_moved'))
 
 
 def movement_accountability(request):
     q = request.GET.get('searchInput')
     if q:
         date_query = datetime.strptime(q, '%d/%m/%Y').date()
-        print(date_query)
-        persons = Movimento.objects.filter(created__contains=date_query)
+        moviments = Movimento.objects.filter(created__contains=date_query)
+        saida = Movimento.objects.filter(created__contains=date_query, transaction_kind__icontains='out').aggregate(Sum('value_moved'))
+        compra = Movimento.objects.filter(created__contains=date_query, transaction_kind__icontains='in').aggregate(Sum('value_moved'))
+        moviments.total_venda = saida['value_moved__sum']
+        moviments.total_compra = compra['value_moved__sum']
     else:
-        date_query = now().year, now().month, now().day
-        persons = Movimento.objects.filter(created__contains=timezone_today())
-    context = {'persons': persons}
-    print(context)
-    return render(request, 'person_accountability.html', context)
+        #date_query = now().year, now().month, now().day
+        moviments = Movimento.objects.filter(created__contains=timezone_today())
+        saida = Movimento.objects.filter(created__contains=timezone_today(), transaction_kind__icontains='out').aggregate(Sum('value_moved'))
+        compra = Movimento.objects.filter(created__contains=timezone_today(), transaction_kind__icontains='in').aggregate(Sum('value_moved'))
+        moviments.total_venda = saida['value_moved__sum']
+        moviments.total_compra = compra['value_moved__sum']
+
+
+        # somatorios = {}
+        #
+        # for moviment in moviments:
+        #     somatorio = somatorios.get(moviment.value_moved, 0)
+        #     if moviment.transaction_kind == 'in' or moviment.transaction_kind == 'eaj':
+        #         somatorio += moviment.value_moved
+        #     else:
+        #         somatorio -= moviment.value_moved
+        #
+        #     moviment.saldo = somatorio
+        #     somatorios[moviment.value_moved] = somatorio
+
+    context = {'moviments': moviments}
+    return render(request, 'moviment_accountability.html', context)
 
 
 def person_turn(request):

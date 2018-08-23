@@ -1,0 +1,124 @@
+{% extends "index.html" %}
+{% block content %}
+
+        <!-- BEGIN SEARCH BAR -->
+        <div class="card-body style-primary no-y-padding">
+            <form class="form form-inverse">
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+
+                        <div class="input-group-content">
+                            <input type="text" class="form-control" id="searchInput" name="searchInput">
+                            <div class="form-control-line"></div>
+                        </div>
+                        <div class="input-group-btn">
+                            <button class="btn btn-floating-action btn-default-bright" type="button"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div><!--end .form-group -->
+            </form>
+        </div><!--end .card-body -->
+        <!-- END SEARCH BAR -->
+
+
+<div class="row">
+
+<!-- BEGIN ALERT - REVENUE -->
+<div class="col-md-6 col-sm-6">
+    <div class="card">
+        <div class="card-body no-padding">
+            <div class="alert alert-callout alert-info no-margin">
+                <strong class="text-xl">{{ moviments.total_compra }}</strong><br>
+                <span class="opacity-50">Valor Recebido</span>
+                <div class="stick-bottom-left-right">
+                    <div class="height-2 sparkline-revenue" data-line-color="#bdc1c1"><canvas style="display: inline-block; width: 329px; height: 80px; vertical-align: top;" width="329" height="80"></canvas></div>
+                </div>
+            </div>
+        </div><!--end .card-body -->
+    </div><!--end .card -->
+</div><!--end .col -->
+<!-- END ALERT - REVENUE -->
+
+
+<!-- BEGIN ALERT - BOUNCE RATES -->
+<div class="col-md-6 col-sm-6">
+    <div class="card">
+        <div class="card-body no-padding">
+            <div class="alert alert-callout alert-danger no-margin">
+                <strong class="text-xl">{{ moviments.total_venda }}</strong><br>
+                <span class="opacity-50">Valor Gasto</span>
+                <div class="stick-bottom-left-right">
+                    <div class="progress progress-hairline no-margin">
+                        <div class="progress-bar progress-bar-danger" style="width:43%"></div>
+                    </div>
+                </div>
+            </div>
+        </div><!--end .card-body -->
+    </div><!--end .card -->
+</div><!--end .col -->
+<!-- END ALERT - BOUNCE RATES -->
+
+
+</div>
+
+
+        <!-- BEGIN RESPONSIVE TABLE 2 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body no-padding">
+                        <div class="table-responsive no-margin">
+                            <table class="table table-striped no-margin">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Código</th>
+                                        <th>Data Movimento</th>
+                                        <th>Valor</th>
+                                        <th>Tipo</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for moviment in moviments %}
+                                        <tr>
+                                            <td>
+                                                <!--<a href="{{ person.get_absolute_url }}">{{ person.id|linebreaks }}</a>-->
+                                            </td>
+                                            <td>
+                                                <a href="{{ moviment.get_absolute_url }}">{{ moviment.id|linebreaks }}</a>
+                                            </td>
+                                            <td>{{ moviment.created|date:"d/m/Y" }}</td>
+                                            <td>{{ moviment.value_moved|floatformat:"2" }}</td>
+                                            <td>{% if moviment.transaction_kind == 'out'%}
+                                                    <i class="medium md-add"></i>
+                                                {% elif moviment.transaction_kind == 'in' %}
+                                                    <i class="medium md-remove"></i>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% empty %}
+                                        <h1>
+                                            Sem registros
+                                        </h1>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div><!--end .table-responsive -->
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+            </div><!--end .col -->
+        </div><!--end .row -->
+        <!-- END RESPONSIVE TABLE 1 -->
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+        $('#multi-select').multiSelect({});
+        $('#searchInput').datepicker({
+            format: 'dd/mm/yyyy'
+            //,startDate: '-3d'
+        });
+        $('#select').select2({});
+    </script>
+{% endblock extrajs %}
