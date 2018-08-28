@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-body no-padding">
                     <div class="alert alert-callout alert-info no-margin">
-                        <strong class="text-xl">{{ moviments.total_compra }}</strong><br>
+                        <strong class="text-xl">{{ moviments.total_compra|default_if_none:"0,00" }}</strong><br>
                         <span class="opacity-50">Valor Recebido</span>
                         <div class="stick-bottom-left-right">
                             <div class="height-2 sparkline-revenue" data-line-color="#bdc1c1"><canvas style="display: inline-block; width: 329px; height: 80px; vertical-align: top;" width="329" height="80"></canvas></div>
@@ -40,7 +40,7 @@
             <div class="card">
                 <div class="card-body no-padding">
                     <div class="alert alert-callout alert-danger no-margin">
-                        <strong class="text-xl">{{ moviments.total_venda }}</strong><br>
+                        <strong class="text-xl">{{ moviments.total_venda|default_if_none:"0,00" }}</strong><br>
                         <span class="opacity-50">Valor Gasto</span>
                         <div class="stick-bottom-left-right">
                             <div class="progress progress-hairline no-margin">

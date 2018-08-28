@@ -106,6 +106,8 @@ def movement_accountability(request):
         moviments = Movimento.objects.filter(created__contains=timezone_today())
         saida = Movimento.objects.filter(created__contains=timezone_today(), transaction_kind__icontains='out').aggregate(Sum('value_moved'))
         compra = Movimento.objects.filter(created__contains=timezone_today(), transaction_kind__icontains='in').aggregate(Sum('value_moved'))
+        #teste = Movimento.objects.values('person__name','transaction_kind').annotate(arroz=Sum('value_moved'))
+
         moviments.total_venda = saida['value_moved__sum']
         moviments.total_compra = compra['value_moved__sum']
 

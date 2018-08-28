@@ -69,12 +69,13 @@
                                 <tbody>
                                     {% for movement in movements %}
                                         <tr>
-                                            <td>{% if movement.transaction_kind == 'out'%}
-                                                    <i class="fa fa-minus-circle"></i>
-                                                {% elif movement.transaction_kind == 'in' %}
-                                                    <i class="fa fa-plus-circle"></i>
+                                            <td>{% if movement.transaction_kind == 'in'%}
+                                                    <i class="medium md-add"></i>
+                                                {% elif movement.transaction_kind == 'out' %}
+                                                    <i class="medium md-remove"></i>
                                                 {% endif %}
                                             </td>
+
                                             <td>{{ movement.value_moved|floatformat:"2" }}</td>
                                             <td>{{ movement.created|date:"d/m/Y" }}</td>
                                             <td>{{ movement.modified|date:"d/m/Y" }}</td>
