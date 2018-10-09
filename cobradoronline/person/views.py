@@ -1,7 +1,7 @@
 import datetime
 
-from django.db.models import Sum
-from django.http import HttpResponseRedirect, HttpResponse
+from django.db.models import Sum, Count
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, request
 from django.shortcuts import render
 
 
@@ -13,6 +13,7 @@ from django.utils.timezone import now
 from datetime import datetime
 
 from django.views.generic.dates import timezone_today
+from rest_framework.response import Response
 
 from cobradoronline.person.forms import PersonForm, MovimentoForm
 from cobradoronline.person.models import Person, Movimento
@@ -21,6 +22,28 @@ from django.views.generic import View
 
 from cobradoronline.utils import render_to_pdf
 
+# class ChartData(View):
+#     authentication_classes = []
+#     permission_classes = []
+#
+#     def get(self, request, format=None):
+#         qs_count = Movimento.objects.values('person__name','transaction_kind').annotate(arroz=Sum('value_moved'))
+#         labels = ["qs_count", "Blue", "Yellow", "Green", "Purple", "Orange"]
+#         print(qs_count)
+#         default_items = [qs_count, 5, 6,4,3,9]
+#         data = {
+#             "labels": labels,
+#             "default":default_items,
+#             #"users": Movimento.objects.values('person__name','transaction_kind').annotate(arroz=Sum('value_moved'))
+#         }
+#
+#         return Response(data)
+# #-----------------------------------------------------------------------------------------------------------------------
+# def get_data(request, *args, **kwargs):
+#     data = Movimento.objects.values('person__name','transaction_kind').annotate(arroz=Sum('value_moved'))
+#     return Response(data)
+
+#-----------------------------------------------------------------------------------------------------------------------
 class GeneratePDF(View):
     def get(self, request, id, *args, **kwargs):
         template = get_template('recibo.html')
@@ -92,7 +115,7 @@ def total_venda(request):
         return Movimento.objects.filter(created__lt=timezone_today(), transaction_kind__icontains='out').aggregate(Sum('value_moved'))
 
 
-def movement_accountability(request):
+def movement_accountability(request, i=0):
     q = request.GET.get('searchInput')
     if q:
         date_query = datetime.strptime(q, '%d/%m/%Y').date()
@@ -101,15 +124,29 @@ def movement_accountability(request):
         compra = Movimento.objects.filter(created__contains=date_query, transaction_kind__icontains='in').aggregate(Sum('value_moved'))
         moviments.total_venda = saida['value_moved__sum']
         moviments.total_compra = compra['value_moved__sum']
+
+        print(saida['value_moved__sum'])
     else:
+        import json
         #date_query = now().year, now().month, now().day
         moviments = Movimento.objects.filter(created__contains=timezone_today())
         saida = Movimento.objects.filter(created__contains=timezone_today(), transaction_kind__icontains='out').aggregate(Sum('value_moved'))
         compra = Movimento.objects.filter(created__contains=timezone_today(), transaction_kind__icontains='in').aggregate(Sum('value_moved'))
-        #teste = Movimento.objects.values('person__name','transaction_kind').annotate(arroz=Sum('value_moved'))
+        from django.db.models import Count
+        #testes = Movimento.objects.values('person__name','transaction_kind').aggregate(Sum('value_moved'), Count('transaction_kind'))
+        testes = Movimento.objects.values('person__name','transaction_kind').annotate(Sum('value_moved'), Count('transaction_kind'))
 
+
+        # for teste in testes:
+        #     print(testes[i])
+        #     i+= 1
+        #
+        # print('------------------------------------------------------------------------------')
+        # print(testes)
+        # print('------------------------------------------------------------------------------')
         moviments.total_venda = saida['value_moved__sum']
         moviments.total_compra = compra['value_moved__sum']
+
 
 
         # somatorios = {}
@@ -127,6 +164,11 @@ def movement_accountability(request):
     context = {'moviments': moviments}
     return render(request, 'moviment_accountability.html', context)
 
+
+def wall_copy(request):
+    posts = Movimento.objects.values('person__name','transaction_kind').annotate(Sum('value_moved'), Count('transaction_kind')).values()
+
+    return JsonResponse(posts, safe=False)
 
 def person_turn(request):
     q = request.GET.get('searchInput')

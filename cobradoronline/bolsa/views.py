@@ -1,11 +1,17 @@
 # Create your views here.
-from cobradoronline.bolsa.models import PlanoDeContas
+from django.views.generic import TemplateView
+
+from cobradoronline.bolsa.models import PlanoDeContas, Questions, Pesquisa
 
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 
+from django.forms import modelformset_factory
+
 import xlrd
+
+from cobradoronline.person.models import Person
 
 
 def simple_upload(request):
@@ -60,10 +66,7 @@ def importaPlanilha(dir):
     #Funcionacom *.xls e *.xlsx
 
     workbook = xlrd.open_workbook(dir)
-    #workbook = xlrd.open_workbook("/home/eliaspai/Área de Trabalho/MODELO_PLANO_DE_CONTAS_PARA_IMPORTAR.xlsx")
 
-    # Posso usar sheet_by_name("Name") ou sheet_by_index(0, 1, 2, ..., N)
-    #worksheet = workbook.sheet_by_name("Plan1")
     worksheet = workbook.sheet_by_index(0)
 
     lista = []
@@ -82,6 +85,78 @@ def importaPlanilha(dir):
 
     PlanoDeContas.objects.bulk_create(lista)
     return HttpResponseRedirect('/bolsa/planodecontas/listar/')
+
+
+# def addQuestions(dir):
+#     person = Person.objects.get(pk=1)
+#     questions = Questions.objects.all()
+#
+#
+#     print(person)
+#
+#     lista = []
+#
+#     for question in questions:
+#         lista.append(
+#             Pesquisa(search_key='092018',
+#                           person=person,
+#                           question=question,
+#                           response='I'
+#                           )
+#         )
+#
+#     Pesquisa.objects.bulk_create(lista)
+#     return HttpResponseRedirect('/admin/bolsa/pesquisa/')
+
+
+def addQuestions(self):
+    person = Person.objects.get(pk=1)
+    questions = Questions.objects.all()
+
+    for question in questions:
+            Pesquisa.objects.get_or_create(
+                search_key='092018',
+                person=person,
+                question=question,
+                response='I'
+            )
+    return HttpResponseRedirect('/admin/bolsa/pesquisa/')
+
+
+class QuestionsDetailWiew(TemplateView):
+    template_name = 'queryes.html'
+
+    def get_formset(self, clear=False):
+        QuestionsFormSet = modelformset_factory(
+            Pesquisa, fields=('response',), can_delete=False, extra=0
+        )
+        if clear:
+            formset = QuestionsFormSet(
+                queryset = Pesquisa.objects.filter(search_key='092018')
+            )
+        else:
+            formset = QuestionsFormSet(
+                queryset = Pesquisa.objects.filter(search_key='092018'),
+                data=self.request.POST or None
+            )
+
+        return formset
+
+    def get_context_data(self, **kwargs):
+        context = super(QuestionsDetailWiew, self).get_context_data(**kwargs)
+        context['formset'] = self.get_formset()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        formset = self.get_formset()
+        context = self.get_context_data(**kwargs)
+        if formset.is_valid:
+            formset.save()
+            context['formset'] = self.get_formset(clear=True)
+        return self.render_to_response(context)
+
+
+questions = QuestionsDetailWiew.as_view()
 
 
 def planodecontas_list(request):

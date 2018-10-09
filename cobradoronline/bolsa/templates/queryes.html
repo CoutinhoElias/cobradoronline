@@ -1,0 +1,54 @@
+{% extends "index.html" %}
+{% load widget_tweaks %}
+{% block content %}
+        <!-- BEGIN RESPONSIVE TABLE 2 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <form class="" action="" method="post">
+                    {% csrf_token %}
+                    {{ formset.management_form }}
+                    <div class="card">
+                        <div class="card-body no-padding">
+                            <div class="table-responsive no-margin">
+                                <table class="table table-striped no-margin">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Período</th>
+                                            <th>Cliente</th>
+                                            <th>Pergunta</th>
+                                            <th>Resposta</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for form in formset %}
+                                            <tr>
+                                                <td>{{ form.instance.pk|linebreaks }}</td>
+                                                <td>{{ form.instance.search_key|linebreaks }}</td>
+                                                <td>{{ form.instance.person|linebreaks }}</td>
+                                                <td>{{ form.instance.question|linebreaks }}</td>
+                                                <td>{% render_field form.response class='form-control' %}</td>
+                                            </tr>
+                                        {% empty %}
+                                            <li>
+                                                Sem registros
+                                            </li>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                                <div class="card-actionbar">
+                                    <div class="card-actionbar-row">
+                                        <button type="submit" class="btn btn-flat btn-primary ink-reaction">Concluir</button>
+                                        <button type="submit" class="btn btn-primary" name="button">Atualizar Carrinho</button></li>
+                                    </div>
+                                </div>
+
+                            </div><!--end .table-responsive -->
+                        </div><!--end .card-body -->
+                    </div>
+                </form>
+            </div><!--end .col -->
+        </div><!--end .row -->
+        <!-- END RESPONSIVE TABLE 1 -->
+{% endblock %}

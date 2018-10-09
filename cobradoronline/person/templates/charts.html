@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+        <!--{% block jquery %}-->
+        <!--<script>-->
+            <!--var endpoint = '/cliente/api/data/'-->
+            <!--$.ajax({-->
+                <!--method = "GET",-->
+                <!--url: endpoint,-->
+                <!--success: function(data){-->
+                    <!--console.log(data)-->
+                <!--},-->
+                <!--error: function(error_data){-->
+                    <!--console.log("error")-->
+                    <!--console.log(error_data)-->
+                <!--}-->
+            <!--})-->
+        <!--</script>-->
+        <!--{% endblock %}-->
+
+    <div class="row">
+        <!-- BEGIN ALERT - REVENUE -->
+        <div class="col-md-6 col-sm-6" url-endpoint='{% url "api-data" %}'>
+            teu cú
+        </div><!--end .col -->
+    </div>
+{% endblock %}

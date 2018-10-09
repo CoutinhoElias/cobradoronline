@@ -1,5 +1,5 @@
 # Register your models here.
-from cobradoronline.bolsa.models import PlanoDeContas
+from cobradoronline.bolsa.models import PlanoDeContas, Questions, Pesquisa
 from django.contrib import admin
 
 
@@ -9,3 +9,14 @@ class PlanoDeContasAdmin(admin.ModelAdmin):
 
 
 admin.site.register(PlanoDeContas, PlanoDeContasAdmin)
+
+
+class QuestionsModelAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Questions, QuestionsModelAdmin)
+
+class PesquisaModelAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Pesquisa, PesquisaModelAdmin)

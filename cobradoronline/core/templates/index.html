@@ -172,6 +172,7 @@
 			<!-- BEGIN CONTENT-->
 			<div id="content">
 				<section>
+
                   {% if messages %}
                       {% for message in messages %}
                           <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
@@ -627,11 +628,16 @@
 		<script src="{% static 'js/libs/select2/select2.min.js' %}"></script>
         <script src="{% static 'js/libs/bootstrap-datepicker/bootstrap-datepicker.js' %}"></script>
 		<script src="{% static 'js/libs/inputmask/jquery.inputmask.bundle.min.js' %}"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 
 
 		<!-- END JAVASCRIPT -->
 
 		<!-- Put App.js last in your javascript imports -->
+        {% block jquery %}
+
+        {% endblock jquery %}
+
 		{% block extrajs %}
 
 		{% endblock extrajs %}

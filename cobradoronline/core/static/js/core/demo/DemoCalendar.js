@@ -238,25 +238,28 @@
             },
 
 
-
+//////////////////////////  ATUAL
             eventDrop: function(event, delta) {
-                $.ajax({
-                        type: "PUT",
-                        url: '/api/bookings/' + event.id +'/edit/',
-                        data: {
 
-                              //user: event.user,
-                              title: event.title,
-                              start: event.start.format('L'),
-                              end: event.end.format('L'),
-                              all_day: true,
-                              color: event.color,
-                              editable: event.editable
-                        },
-                    success: function(json) {
-                        alert(event.title + " foi modificado para data " + event.start.format('L'));
-                    }
-                });
+                      $.ajax({
+                            type: "PUT",
+                            url: '/api/bookings/' + event.id +'/edit/',
+                            data: {
+
+                                  //user: event.user,
+                                  title: event.title,
+                                  start: event.start.format(),
+                                  end: event.end.format(),
+                                  all_day: true,
+                                  color: event.color,
+                                  editable: event.editable
+                            },
+                        success: function(json) {
+                            alert(event.title + " foi modificado para data " + event.start.format('L'));
+                        }
+                    });
+
+
             },
 
 
@@ -265,7 +268,6 @@
                         type: "PUT",
                         url: '/api/bookings/' + event.id +'/edit/',
                         data: {
-
                               //user: event.user,
                               title: event.title,
                               start: event.start.format(),
@@ -281,14 +283,6 @@
 
             },
 
-//			eventRender: function (event, element) {
-//				element.find('#date-title').html(element.find('span.fc-event-title').text());
-//			}
-
-//             eventRender: function(event, element) {
-//                  $(element).popover({title: event.title, content: 'Inicia em: ' + event.start.format('DD/MM/YYYY HH:mm:ss') + ' termina em: ' + event.end.format('DD/MM/YYYY HH:mm:ss'), trigger : 'hover'});
-//
-//              }
 
 
             eventRender: function (event, element) {
