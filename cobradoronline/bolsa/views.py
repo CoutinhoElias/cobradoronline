@@ -108,19 +108,49 @@ def importaPlanilha(dir):
 #     Pesquisa.objects.bulk_create(lista)
 #     return HttpResponseRedirect('/admin/bolsa/pesquisa/')
 
+# def pp(request):
+#     if request.method == 'POST':
+#         form = ProfissoesPessoaForm(request.POST)
+#
+#         if not form.is_valid():
+#             return render(request, 'sosmypc/profissoes_pessoa_forms.html', {'form': form})
+#
+#         pessoa = request.POST['pessoa']
+#         profissao = request.POST['profissao']
+#         rating = request.POST['rating']
+#
+#         ProfissoesPessoa.objects.create(pessoa=pessoa.user.pessoa,
+#                                         profissao=profissao,
+#                                         rating=rating)
+#
+#         return HttpResponseRedirect('/cadastrarprofissaopessoa/')
+#     else:
+#         return render(request, 'sosmypc/profissoes_pessoa_forms.html',
+#                       {'form': ProfissoesPessoaForm(initial={'pessoa': request.user.pessoa})})
 
-def addQuestions(self):
+
+def addQuestions(request):
     person = Person.objects.get(pk=1)
     questions = Questions.objects.all()
 
     for question in questions:
+        try:
+            Pesquisa.objects.get(
+                search_key='092018',
+                person=person,
+                question=question
+            )
+            print('existe')
+        except Pesquisa.DoesNotExist:
             Pesquisa.objects.get_or_create(
                 search_key='092018',
                 person=person,
                 question=question,
                 response='I'
             )
-    return HttpResponseRedirect('/admin/bolsa/pesquisa/')
+            print('Não existe')
+
+    return HttpResponseRedirect('bolsa/pesquisa/listar')
 
 
 class QuestionsDetailWiew(TemplateView):
@@ -150,9 +180,13 @@ class QuestionsDetailWiew(TemplateView):
     def post(self, request, *args, **kwargs):
         formset = self.get_formset()
         context = self.get_context_data(**kwargs)
-        if formset.is_valid:
+        if formset.is_valid():
+            print('Formulário válido!')
             formset.save()
+            print('Dados salvos!')
             context['formset'] = self.get_formset(clear=True)
+        else:
+            print(formset)
         return self.render_to_response(context)
 
 
