@@ -21,6 +21,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pesquisa',
             name='search_key',
-            field=models.CharField(db_index=True, default='bolsa.Pesquisa.question', max_length=10, verbose_name='Chave da pesquisa'),
+            field=models.CharField(db_index=True, default='bolsa.Pesquisa.question', max_length=50, verbose_name='Chave da pesquisa'),
         ),
     ]
