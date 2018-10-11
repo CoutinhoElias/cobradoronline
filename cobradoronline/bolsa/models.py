@@ -57,7 +57,7 @@ class Pesquisa(models.Model):
         ('F', 'Falso'),
         ('I', 'Indefinido'),
     )
-    search_key = models.CharField('Chave da pesquisa', max_length=10, db_index=False)
+    search_key = models.CharField('Chave da pesquisa', max_length=50, db_index=False)
     person = models.ForeignKey('person.person', related_name='Pessoa', on_delete=models.CASCADE)
     question = models.ForeignKey('bolsa.Questions', related_name='Pergunta', on_delete=models.CASCADE,)
     response = models.CharField('Resposta', max_length=1, choices=RESPOSTA_CHOICES, default='I')
