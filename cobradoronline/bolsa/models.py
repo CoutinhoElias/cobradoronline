@@ -51,6 +51,7 @@ class PesquisaManager(models.Manager):
             pesquisa.save()
         return pesquisa
 
+
 class Pesquisa(models.Model):
     RESPOSTA_CHOICES = (
         ('V', 'Verdadeiro'),

@@ -8,7 +8,7 @@ TRANSACTION_KIND = (
     ("saj", "Ajuste recebimento do Cliente")
 )
 
-# Create your models here.
+
 class Person(models.Model):
     name = models.CharField('Nome',max_length=100)
     balance = models.DecimalField('Saldo', max_digits=10, decimal_places=2)
@@ -20,7 +20,6 @@ class Person(models.Model):
     neighborhood = models.CharField('Bairro',max_length=50)
     date_of_turn = models.DateField('Dt. Giro.')
     date_return = models.DateField('Dt. Retorno.', null=True, blank=True)
-
 
     class Meta:
         verbose_name_plural = 'Pessoas'
@@ -49,13 +48,14 @@ class Movimento(models.Model):
     person = models.ForeignKey('person.Person', related_name='person_item',on_delete=models.CASCADE)
     transaction_kind = models.CharField('Tipo Movimento', max_length=4, choices=TRANSACTION_KIND)
     value_moved = models.DecimalField('Valor Movimento', max_digits=10, decimal_places=2)
-    created = models.DateTimeField('created', auto_now_add=True)
+    created = models.DateField('created')
     modified = models.DateTimeField('modified', auto_now=True)
     date_return = models.DateField('Dt. Retorno..')
 
     class Meta:
         verbose_name = 'Movimento'
         verbose_name_plural = 'Movimentos'
+
 
 def post_save_movimento(sender, instance, created,  **kwargs):
     if created:
@@ -72,6 +72,7 @@ def post_save_movimento(sender, instance, created,  **kwargs):
         instance.person.balance += instance.person.stock_avaliable()
         instance.person.date_return = instance.date_return
         instance.person.save()
+
 
 models.signals.post_save.connect(
     post_save_movimento, sender=Movimento, dispatch_uid='post_save_movimento'

@@ -78,6 +78,7 @@
 
                                             <td>{{ movement.value_moved|floatformat:"2" }}</td>
                                             <td>{{ movement.created|date:"d/m/Y" }}</td>
+                                            <td>{{ movement.created|date:"l" }}</td>
                                             <td>{{ movement.modified|date:"d/m/Y" }}</td>
                                         </tr>
                                     {% empty %}

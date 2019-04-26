@@ -50,6 +50,7 @@ def simple_upload(request):
 #
 #     return render(request, 'import_form.html')
 
+
 def remove(field):
     a = str(field)
 

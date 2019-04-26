@@ -1,128 +1,83 @@
 {% extends "index.html" %}
-
 {% block content %}
+<!-- BEGIN VERTICAL FORM -->
+    <div class="col-md-12">
+        <form class="create-form" url="{% url 'person:movement_create' %}" method="post">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-head style-primary">
+                    <header>Movimento</header>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                {{form.person.errors}}
+                                {{form.person}}
+                                <label for="{{ form.person.id_for_label}}">{{form.person.label}}</label>
+                            </div>
+                        </div>
 
-    <div class="col-lg-offset-1 col-md-10">
-								<form class="create-form" url="{% url 'person:movement_create' %}" method="post">
-                                    {% csrf_token %}
-									<div class="card">
-										<div class="card-head style-primary">
-											<header>Movimento</header>
-										</div>
-										<div class="card-body">
+                        <div class="input-group date col-sm-4" id="datepicker2">
+                             <div class="input-group-content">
+                                {{form.created.errors}}
+                                {{form.created}}
+                                <label for="{{form.created.id_for_label}}">{{form.created.label}}</label>
+                            </div>
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <br/>
 
-											<div class="form-group">
-                                                    {{form.person}}
-												<label for="{{form.person.label}}">{{form.person.label}}</label>
-											</div>
-
-
-
-											<div class="row">
-												<div class="col-sm-4">
-													<div class="form-group">
-                                                        {{form.transaction_kind.errors}}
-                                                        {{form.transaction_kind}}
-                                                        <label for="{{ form.transaction_kind.id_for_label}}">{{form.transaction_kind.label}}</label>
-													</div>
-												</div>
-
-												<div class="col-sm-4">
-													<div class="form-group">
-                                                        {{form.value_moved.errors}}
-                                                        {{form.value_moved}}
-                                                        <label for="{{ form.value_moved.id_for_label}}">{{form.value_moved.label}}</label>
-													</div>
-												</div>
-
-                                                <div class="form-group control-width-normal col-sm-4">
-                                                    <div class="input-group date" id="datepicker">
-                                                     <div class="input-group-content">
-                                                        {{form.date_return.errors}}
-                                                        {{form.date_return}}
-                                                        <label for="{{form.date_return.id_for_label}}">{{form.date_return.label}}</label>
-                                                    </div>
-                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                    </div>
-                                                </div><!--end .form-group -->
-											</div>
-										</div><!--end .card-body -->
-										<div class="card-actionbar">
-											<div class="card-actionbar-row">
-												<button type="submit" class="btn btn-flat btn-primary ink-reaction">Concluir</button>
-											</div>
-										</div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {{form.transaction_kind.errors}}
+                                {{form.transaction_kind}}
+                                <label for="{{ form.transaction_kind.id_for_label}}">{{form.transaction_kind.label}}</label>
+                            </div>
+                        </div>
 
 
-									</div><!--end .card -->
-									<em class="text-caption">Vertical layout with static labels</em>
-								</form>
-							</div><!--end .col -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {{form.value_moved.errors}}
+                                {{form.value_moved}}
+                                <label for="{{ form.value_moved.id_for_label}}">{{form.value_moved.label}}</label>
+                            </div>
+                        </div>
 
 
-                                <!--<label class="checkbox checkbox-styled">-->
+                        <div class="input-group date col-sm-4" id="datepicker1">
+                             <div class="input-group-content">
+                                {{form.date_return.errors}}
+                                {{form.date_return}}
+                                <label for="{{form.date_return.id_for_label}}">{{form.date_return.label}}</label>
+                            </div>
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-actionbar">
+                        <div class="card-actionbar-row">
+                            <button type="submit" class="btn btn-flat btn-primary ink-reaction">Concluir</button>
+                        </div>
+                    </div>
+        </form>
+    </div><!--end .col -->
 
-                                    <!--<label for="{{ form.holiday.id_for_label }}" class="col-sm-3">-->
-                                        <!--{{ form.holiday }}-->
-                                        <!--{{ form.holiday.errors }}-->
-                                        <!--<span>{{ form.holiday.label }}</span>-->
-                                    <!--</label>-->
-
-                                    <!--<label for="{{ form.overlap.id_for_label }}" class="col-sm-3">-->
-                                        <!--{{ form.overlap }}-->
-                                        <!--{{ form.overlap.errors }}-->
-                                        <!--<span>{{ form.overlap.label }}</span>-->
-                                    <!--</label>-->
-
-                                    <!--<label for="{{ form.allday.id_for_label }}" class="col-sm-3">-->
-                                        <!--{{ form.allday }}-->
-                                        <!--{{ form.allday.errors }}-->
-                                        <!--<span>{{ form.allday.label }}</span>-->
-                                    <!--</label>-->
-
-                                    <!--<label for="{{ form.editable.id_for_label }}" class="col-sm-3">-->
-                                        <!--{{ form.editable }}-->
-                                        <!--{{ form.editable.errors }}-->
-                                        <!--<span>{{ form.editable.label }}</span>-->
-                                    <!--</label>-->
-
-                                    <!--<label for="{{ form.authorized.id_for_label }}" class="col-sm-3">-->
-                                        <!--{{ form.authorized }}-->
-                                        <!--{{ form.authorized.errors }}-->
-                                        <!--<span>{{ form.authorized.label }}</span>-->
-                                    <!--</label>-->
-                                <!--</label>-->
-
-                                <!--&lt;!&ndash; BEGIN MULTI-SELECT &ndash;&gt;-->
-                                <!--<div class="row">-->
-                                    <!--<div class="col-lg-offset-0 col-md-12">-->
-                                            <!--{{form.color}}-->
-                                    <!--</div>&lt;!&ndash;end .col &ndash;&gt;-->
-                                <!--</div>&lt;!&ndash;end .row &ndash;&gt;-->
-                                 <!--&lt;!&ndash; END MULTI-SELECT &ndash;&gt;-->
-
-
-                                <!--&lt;!&ndash; BEGIN MULTI-SELECT &ndash;&gt;-->
-                                <!--<div class="row">-->
-                                    <!--<span>{{form.participants.label}}</span>-->
-                                    <!--<div class="col-lg-offset-0 col-md-12">-->
-                                            <!--{{form.participants}}-->
-                                    <!--</div>&lt;!&ndash;end .col &ndash;&gt;-->
-                                <!--</div>&lt;!&ndash;end .row &ndash;&gt;-->
-                                 <!--&lt;!&ndash; END MULTI-SELECT &ndash;&gt;-->
-
-                </form>
-            </div>
-        </div><!--end .col -->
-    </div><!--end .row -->
-    <!-- END VERTICAL FORM FLOATING LABELS -->
+<!-- END VERTICAL FORM -->
 
 {% endblock content %}
 
 {% block extrajs %}
     <script>
         $('#multi-select').multiSelect({});
-        $('#datepicker').datepicker({
+        $('#datepicker1').datepicker({
+            format: 'dd/mm/yyyy'
+            //,startDate: '-3d'
+        });
+
+        $('#datepicker2').datepicker({
             format: 'dd/mm/yyyy'
             //,startDate: '-3d'
         });
