@@ -32,6 +32,7 @@ class PersonForm(forms.ModelForm):
         model = Person
         exclude = ['date_return']
         fields = '__all__'
+        ordering = ('name',)
 
 
 TRANSACTION_KIND = (
@@ -59,3 +60,4 @@ class MovimentoForm(forms.ModelForm):
         model = Movimento
         exclude = ['modified']
         fields = '__all__'
+        ordering = ('person',)

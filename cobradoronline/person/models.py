@@ -24,6 +24,7 @@ class Person(models.Model):
     class Meta:
         verbose_name_plural = 'Pessoas'
         verbose_name = 'Pessoa'
+        ordering = ('name',)
 
     def stock_avaliable(self):
         itens_nota = Movimento.objects.select_related('person').all().order_by("created")
@@ -55,6 +56,7 @@ class Movimento(models.Model):
     class Meta:
         verbose_name = 'Movimento'
         verbose_name_plural = 'Movimentos'
+        ordering = ('person',)
 
 
 def post_save_movimento(sender, instance, created,  **kwargs):

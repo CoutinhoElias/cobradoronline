@@ -174,7 +174,7 @@ def movement_create(request):
         else:
             print('<<<<==== AVISO DE FORMULARIO INVALIDO ====>>>>')
             print(form)
-            return render(request, 'movement_create.html', {'form':form})
+            return render(request, 'movement_create.html', {'form': form})
     else:
         context = {'form': MovimentoForm()}
         return render(request, 'movement_create.html', context)
