@@ -60,4 +60,4 @@ class MovimentoForm(forms.ModelForm):
         model = Movimento
         exclude = ['modified']
         fields = '__all__'
-        ordering = ('person',)
+        # ordering = ('person',)
