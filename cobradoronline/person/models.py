@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
@@ -12,11 +13,12 @@ TRANSACTION_KIND = (
 class Person(models.Model):
     name = models.CharField('Nome',max_length=100)
     balance = models.DecimalField('Saldo', max_digits=10, decimal_places=2)
+    user = models.ForeignKey(User, related_name='Person_Usuário', on_delete=models.CASCADE)
     public_place = models.CharField('Logradouro',max_length=150)
     number = models.CharField('Número',max_length=150)
-    city = models.CharField('Cidade',max_length=150)
-    state = models.CharField('Estado',max_length=150)
-    zipcode = models.CharField('Cep',max_length=10)
+    city = models.CharField('Cidade', max_length=150)
+    state = models.CharField('Estado', max_length=150)
+    zipcode = models.CharField('Cep', max_length=10)
     neighborhood = models.CharField('Bairro',max_length=50)
     date_of_turn = models.DateField('Dt. Giro.')
     date_return = models.DateField('Dt. Retorno.', null=True, blank=True)
@@ -52,6 +54,7 @@ class Movimento(models.Model):
     created = models.DateField('created')
     modified = models.DateTimeField('modified', auto_now=True)
     date_return = models.DateField('Dt. Retorno..')
+    user = models.ForeignKey(User, related_name='Movimento_Usuário', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Movimento'

@@ -1,9 +1,8 @@
 from django.db import models
 from django.utils import timezone
-#DATA-PAPEL-OP(COMPRA.VENDA,DIVIDENDOS,SPLIT), QTD, CUSTO TOTAL(CORRETAGEM+IMPOSTOS)
-# Create your models here.
 
-#0.00.00.00.00.00.0000-0
+
+# 0.00.00.00.00.00.0000-0
 class PlanoDeContas(models.Model):
     classification = models.CharField('Classificação', primary_key=True, max_length=100)
     name = models.CharField('Descrição', max_length=100)
@@ -42,6 +41,7 @@ class Questions(models.Model):
     def __str__(self):
         return self.question
 
+
 class PesquisaManager(models.Manager):
     def add_question(self, search_key, question):
         pesquisa, created = self.get_or_create(search_key=search_key, question=question)
@@ -53,11 +53,13 @@ class PesquisaManager(models.Manager):
 
 
 class Pesquisa(models.Model):
+
     RESPOSTA_CHOICES = (
         ('V', 'Verdadeiro'),
         ('F', 'Falso'),
         ('I', 'Indefinido'),
     )
+
     search_key = models.CharField('Chave da pesquisa', max_length=200, db_index=False)
     person = models.ForeignKey('person.person', related_name='Pessoa', on_delete=models.CASCADE)
     question = models.ForeignKey('bolsa.Questions', related_name='Pergunta', on_delete=models.CASCADE,)
@@ -67,7 +69,6 @@ class Pesquisa(models.Model):
 
     objects = PesquisaManager()
 
-
     class Meta:
         verbose_name = 'Pesquisa'
         verbose_name_plural = 'Pesquisas'
@@ -76,6 +77,3 @@ class Pesquisa(models.Model):
 
     def __str__(self):
         return self.question.question
-
-    # def get_absolute_url(self):
-    #     return reverse('scheduling:agendamento')

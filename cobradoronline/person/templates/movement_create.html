@@ -27,6 +27,7 @@
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
+
                     <br/>
 
                     <div class="row">
@@ -57,6 +58,24 @@
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
+
+
+
+                    <br/>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                {{form.user.errors}}
+                                {{form.user}}
+                                <label for="{{ form.user.id_for_label}}">{{form.user.label}}</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
                     <div class="card-actionbar">
                         <div class="card-actionbar-row">
                             <button type="submit" class="btn btn-flat btn-primary ink-reaction">Concluir</button>

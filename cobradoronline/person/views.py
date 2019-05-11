@@ -54,6 +54,7 @@ def person_create(request):
         if form.is_valid():
             print('<<<<==== FORM VALIDO ====>>>>')
             new = form.save(commit=False)
+            new.user = request.user
             new.save()
             form.save_m2m()
 
@@ -167,6 +168,7 @@ def movement_create(request):
         if form.is_valid():
             print('<<<<==== FORM VALIDO ====>>>>')
             new = form.save(commit=False)
+            new.user = request.user
             new.save()
             form.save_m2m()
 

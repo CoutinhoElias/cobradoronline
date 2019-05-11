@@ -30,7 +30,7 @@ class PersonForm(forms.ModelForm):
 
     class Meta:
         model = Person
-        exclude = ['date_return']
+        exclude = ['date_return', 'user']
         fields = '__all__'
         ordering = ('name',)
 
@@ -58,6 +58,6 @@ class MovimentoForm(forms.ModelForm):
 
     class Meta:
         model = Movimento
-        exclude = ['modified']
+        exclude = ['modified', 'user']
         fields = '__all__'
         # ordering = ('person',)

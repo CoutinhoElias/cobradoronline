@@ -14,9 +14,12 @@ admin.site.register(PlanoDeContas, PlanoDeContasAdmin)
 class QuestionsModelAdmin(admin.ModelAdmin):
     pass
 
+
 admin.site.register(Questions, QuestionsModelAdmin)
+
 
 class PesquisaModelAdmin(admin.ModelAdmin):
     pass
+
 
 admin.site.register(Pesquisa, PesquisaModelAdmin)
