@@ -1,7 +1,7 @@
 # Create your views here.
 from django.views.generic import TemplateView
 
-from cobradoronline.bolsa.models import PlanoDeContas, Questions, Pesquisa
+from cobradoronline.bolsa.models import PlanoDeContas
 
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
