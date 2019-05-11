@@ -76,4 +76,4 @@ class Pesquisa(models.Model):
         ordering = ('-participation_on',)
 
     def __str__(self):
-        return self.question.question
+        return self.question
