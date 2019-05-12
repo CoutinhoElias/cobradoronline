@@ -41,16 +41,6 @@ class Questions(models.Model):
         return self.question
 
 
-class PesquisaManager(models.Manager):
-    def add_question(self, search_key, question):
-        pesquisa, created = self.get_or_create(search_key=search_key, question=question)
-        if not created:
-            pesquisa.person = pesquisa.person
-            pesquisa.question = pesquisa.question
-            pesquisa.save()
-        return pesquisa
-
-
 class Pesquisa(models.Model):
 
     RESPOSTA_CHOICES = (
@@ -65,8 +55,6 @@ class Pesquisa(models.Model):
     response = models.CharField('Resposta', max_length=1, choices=RESPOSTA_CHOICES, default='I')
     participation_on = models.DateField('período dapesquisa')
     created_on = models.DateTimeField('solicitado em')
-
-    objects = PesquisaManager()
 
     class Meta:
         verbose_name = 'Pesquisa'
