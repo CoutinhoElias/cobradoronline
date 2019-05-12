@@ -71,7 +71,7 @@ class Pesquisa(models.Model):
     class Meta:
         verbose_name = 'Pesquisa'
         verbose_name_plural = 'Pesquisas'
-        unique_together = (('search_key', 'person', 'question'),)
+        # unique_together = (('search_key', 'person', 'question'),)
         ordering = ('-participation_on',)
 
     def __str__(self):
