@@ -28,17 +28,17 @@ class Person(models.Model):
         verbose_name = 'Pessoa'
         ordering = ('name',)
 
-    def stock_avaliable(self):
-        itens_nota = Movimento.objects.select_related('person').all().order_by("created")
-        total_avaliable = 0
-
-        for transaction in itens_nota:
-            if transaction.person.transaction_kind == 'in' or transaction.person.transaction_kind == 'eaj':
-                total_avaliable += transaction.balance
-            else:
-                total_avaliable -= transaction.balance
-
-        return total_avaliable
+    # def stock_avaliable(self):
+    #     itens_nota = Movimento.objects.select_related('person').all().order_by("created")
+    #     total_avaliable = 0
+    #
+    #     for transaction in itens_nota:
+    #         if transaction.person.transaction_kind == 'in' or transaction.person.transaction_kind == 'eaj':
+    #             total_avaliable += transaction.balance
+    #         else:
+    #             total_avaliable -= transaction.balance
+    #
+    #     return total_avaliable
 
     def __str__(self):
         return self.name
@@ -74,7 +74,7 @@ def post_save_movimento(sender, instance, created,  **kwargs):
             instance.person.save()
     else:
         instance.person.balance -= instance.person.balance
-        instance.person.balance += instance.person.stock_avaliable()
+        instance.person.balance += instance.person.balance # instance.person.stock_avaliable()
         instance.person.date_return = instance.date_return
         instance.person.save()
 

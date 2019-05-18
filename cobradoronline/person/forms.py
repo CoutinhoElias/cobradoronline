@@ -1,8 +1,8 @@
 from django import forms
-from django.forms import ChoiceField
+from django.contrib.auth.models import User
 
 from cobradoronline.person.models import Person, Movimento
-from django.contrib.admin.widgets import AdminTextInputWidget, FilteredSelectMultiple
+from django.contrib.admin.widgets import AdminTextInputWidget
 
 
 # default='Brasil', editable=False
@@ -45,16 +45,41 @@ TRANSACTION_KIND = (
 
 
 class MovimentoForm(forms.ModelForm):
-    person = forms.ModelChoiceField(label='Pessoa', widget=forms.Select(attrs={'class': 'form-control'}), required=True, queryset=Person.objects.all())
-    transaction_kind = forms.ChoiceField(label='Tipo Movimento', widget=forms.Select(attrs={'class': 'form-control'}), required=True, choices=TRANSACTION_KIND)
-    value_moved = forms.DecimalField(label='Valor Movimentado', widget=AdminTextInputWidget(attrs={'class': 'form-control input-lg'}) , max_digits=10, decimal_places=2)
-    created = forms.DateField(label='Dt. Movimento', widget=forms.TextInput(attrs={'class': 'form-control input-lg'}))
-    date_return = forms.DateField(label='Dt. Retorno', widget=forms.TextInput(attrs={'class': 'form-control input-lg'}))
+    person = forms.ModelChoiceField(label='Pessoa', widget=forms.Select(attrs={'class': 'form-control'}), required=True,
+                                    queryset=Person.objects.all())
 
-    def __init__(self, *args, **kwargs):
-        super(MovimentoForm, self).__init__(*args, **kwargs)
+    transaction_kind = forms.ChoiceField(label='Tipo Movimento',
+                                         widget=forms.Select(attrs={'class': 'form-control'}),
+                                         required=True, choices=TRANSACTION_KIND)
+    value_moved = forms.DecimalField(label='Valor Movimentado',
+                                     widget=AdminTextInputWidget(attrs={'class': 'form-control input-lg'}),
+                                     max_digits=10,
+                                     decimal_places=2)
+    created = forms.DateField(label='Dt. Movimento',
+                              widget=forms.TextInput(attrs={'class': 'form-control input-lg'}))
+    date_return = forms.DateField(label='Dt. Retorno',
+                                  widget=forms.TextInput(attrs={'class': 'form-control input-lg'}))
+
+    # def __init__(self, user,  *args, **kwargs):
+    #     super(MovimentoForm, self).__init__(*args, **kwargs)
+    #     self.fields['moved'].widget.is_localized = True
+
+    def __init__(self, user_id, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        print(user_id)
+
+        # user_id ta sendo passado via GET da VIEW, assim pego o id do usuario para meu queryset.
+        self.fields['person'].queryset = Person.objects.filter(user_id=user_id)
+
         self.fields['value_moved'].localize = True
         self.fields['value_moved'].widget.is_localized = True
+
+        """
+        A variavel pk acima vem da view atendimento_create(request, pk): onde envio esse valor
+        no GET na linha 29
+        context = {'form': AtendimentoForm(pk)}
+        """
 
     class Meta:
         model = Movimento

@@ -53,7 +53,7 @@ class Pesquisa(models.Model):
     person = models.ForeignKey('person.person', related_name='Pessoa', on_delete=models.CASCADE)
     question = models.ForeignKey('bolsa.Questions', related_name='Pergunta', on_delete=models.CASCADE,)
     response = models.CharField('Resposta', max_length=1, choices=RESPOSTA_CHOICES, default='I')
-    participation_on = models.DateField('período dapesquisa')
+    participation_on = models.DateField('período da pesquisa')
     created_on = models.DateTimeField('solicitado em')
 
     class Meta:

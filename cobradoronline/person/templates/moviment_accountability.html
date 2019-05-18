@@ -65,8 +65,8 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Código</th>
-                                        <th>Data Movimento</th>
+                                        <th>Cobrador</th>
+                                        <th>Ação</th>
                                         <th>Valor</th>
                                         <th>Tipo</th>
 
@@ -79,10 +79,15 @@
                                                 <!--<a href="{{ person.get_absolute_url }}">{{ person.id|linebreaks }}</a>-->
                                             </td>
                                             <td>
-                                                <a href="{{ moviment.get_absolute_url }}">{{ moviment.id|linebreaks }}</a>
+                                                <a href="{{ moviment.get_absolute_url }}">{{ moviment.user__username|linebreaks }}</a>
                                             </td>
-                                            <td>{{ moviment.created|date:"d/m/Y" }}</td>
-                                            <td>{{ moviment.value_moved|floatformat:"2" }}</td>
+                                            <td>{% if moviment.transaction_kind == 'in'%}
+                                                    Cobrou
+                                                {% elif moviment.transaction_kind == 'out' %}
+                                                    Vendeu
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ moviment.value_moved__sum|floatformat:"2" }}</td>
                                             <td>{% if moviment.transaction_kind == 'in'%}
                                                     <i class="medium md-add"></i>
                                                 {% elif moviment.transaction_kind == 'out' %}
