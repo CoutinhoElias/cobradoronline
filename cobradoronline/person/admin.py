@@ -19,10 +19,18 @@ from cobradoronline.person.models import Person, Movimento
 #
 #
 # admin.site.register(Person, PersonModelAdmin)
+class MyModelAdmin(admin.ModelAdmin):
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(author=request.user)
+
 
 @admin.register(Person)
 class PersonModelAdmin(admin.ModelAdmin):
     list_display = ('pk',
+                    'user',
                     'name',
                     'public_place',
                     'number', 'city',
@@ -32,13 +40,15 @@ class PersonModelAdmin(admin.ModelAdmin):
                     'balance',
                     'date_of_turn',
                     'date_return')
-    exclude = ['user', ]
+    # exclude = ['user', ]
 
-    # PERMITE QUE O FK SEJA LISTADO SOMENTE COM FILTROS PERSONALIZADOS
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "person":
-            kwargs["queryset"] = Person.objects.filter(user_id=request.user)
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        print(request.user, '<<<<<<<<<')
+        # if request.user.is_superuser:
+        #     return qs
+
+        return qs.filter(user=request.user)
 
     def save_model(self, request, obj, form, change):
         obj.user = request.user
