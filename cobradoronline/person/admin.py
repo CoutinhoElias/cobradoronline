@@ -48,7 +48,7 @@ class PersonModelAdmin(admin.ModelAdmin):
         # if request.user.is_superuser:
         #     return qs
 
-        return qs.filter(user=(request.user, 2))
+        return qs.filter(user__in=[request.user, 2])
 
     def save_model(self, request, obj, form, change):
         obj.user = request.user
@@ -63,7 +63,7 @@ class MovimentoModelAdmin(admin.ModelAdmin):
     # PERMITE QUE O FK SEJA LISTADO SOMENTE COM FILTROS PERSONALIZADOS
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "person":
-            kwargs["queryset"] = Person.objects.filter(user_id=(request.user, 2))
+            kwargs["queryset"] = Person.objects.filter(user_id__in=[request.user, 2])
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def save_model(self, request, obj, form, change):

@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Count
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, request
 from django.shortcuts import render, get_object_or_404
@@ -178,14 +179,15 @@ def person_turn(request):
     return render(request, 'person_turn.html', context)
 
 
+@login_required
 def person_list(request):
     q = request.GET.get('searchInput')
 
     if q:
         print(q)
-        persons = Person.objects.filter(name__icontains=q, user=(request.user, 2))
+        persons = Person.objects.filter(name__icontains=q, user__in=[request.user, 2])
     else:
-        persons = Person.objects.filter(user=(request.user, 2))
+        persons = Person.objects.filter(user__in=[request.user, 2])
     context = {'persons': persons}
     print(context)
     return render(request, 'person_list.html', context)
@@ -197,7 +199,7 @@ def person_view(request, id):
 
     context = {
         'person':person,
-        'movements': movements
+        'movements':movements
     }
     return render(request, 'person_view.html', context)
 
