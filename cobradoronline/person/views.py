@@ -183,9 +183,9 @@ def person_list(request):
 
     if q:
         print(q)
-        persons = Person.objects.filter(name__icontains=q, user=request.user)
+        persons = Person.objects.filter(name__icontains=q, user=(request.user, 2))
     else:
-        persons = Person.objects.filter(user=request.user)
+        persons = Person.objects.filter(user=(request.user, 2))
     context = {'persons': persons}
     print(context)
     return render(request, 'person_list.html', context)
@@ -197,7 +197,7 @@ def person_view(request, id):
 
     context = {
         'person':person,
-        'movements':movements
+        'movements': movements
     }
     return render(request, 'person_view.html', context)
 
