@@ -183,12 +183,20 @@ def person_turn(request):
 def person_list(request):
     q = request.GET.get('searchInput')
 
-    if q:
-        print(q)
-        persons = Person.objects.filter(name__icontains=q, user__in=[request.user, 2])
+    if request.user.id == 2:
+        if q:
+            print(q)
+            persons = Person.objects.filter(name__icontains=q)
+        else:
+            persons = Person.objects.all()
+        context = {'persons': persons}
     else:
-        persons = Person.objects.filter(user__in=[request.user, 2])
-    context = {'persons': persons}
+        if q:
+            print(q)
+            persons = Person.objects.filter(name__icontains=q, user__in=[request.user])
+        else:
+            persons = Person.objects.filter(user__in=[request.user])
+        context = {'persons': persons}
     print(context)
     return render(request, 'person_list.html', context)
 

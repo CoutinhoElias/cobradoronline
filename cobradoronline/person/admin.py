@@ -19,6 +19,7 @@ from cobradoronline.person.models import Person, Movimento
 #
 #
 # admin.site.register(Person, PersonModelAdmin)
+
 class MyModelAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -44,11 +45,13 @@ class PersonModelAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        print(request.user, '<<<<<<<<< Listado por PersonModelAdmin')
+        print(request.user.id, '<<<<<<<<< Listado por PersonModelAdmin')
         # if request.user.is_superuser:
         #     return qs
-
-        return qs.filter(user__in=[request.user, 2])
+        if request.user.id == 2:
+            return qs.all()
+        else:
+            return qs.filter(user__in=[request.user])
 
     def save_model(self, request, obj, form, change):
         obj.user = request.user
