@@ -44,7 +44,7 @@ class PersonModelAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        print(request.user, '<<<<<<<<<')
+        print(request.user, '<<<<<<<<< Listado por PersonModelAdmin')
         # if request.user.is_superuser:
         #     return qs
 
