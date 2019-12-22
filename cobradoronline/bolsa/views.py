@@ -62,7 +62,6 @@ def remove(field):
     return a
 
 
-
 def importaPlanilha(dir):
     #Funcionacom *.xls e *.xlsx
 
